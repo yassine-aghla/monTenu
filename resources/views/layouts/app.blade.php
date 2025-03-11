@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title ?? 'Dashboard' }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Si ce n'est pas une page d'authentification, afficher le layout du dashboard -->
+    @if (!isset($isAuthPage) || !$isAuthPage)
+        <div class="min-h-screen flex">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-white shadow-md p-4">
+                <h2 class="text-xl font-bold mb-4">Dashboard</h2>
+                <nav>
+                    <ul class="space-y-2">
+                        <li><a href="{{ route('dashboard') }}" class="block p-2 bg-gray-200 rounded">Dashboard</a></li>
+                        <li><a href="{{ route('tenues.create') }}" class="block p-2 bg-gray-100 rounded">Manage Tenues</a></li>
+                        <li>
+                            <a href="{{ route('clients.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Clients</a>
+                        </li>
+                        <li><a href="{{ route('categories.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Categories</a></li>
+                        <li><a href="{{ route('commandes.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Commandes</a></li>
+                        <li>
+                            <a href="{{ route('paniers.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Panier</a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+            
+            <!-- Main Content -->
+            <div class="flex-1 flex flex-col">
+                <!-- Header -->
+                <header class="bg-white shadow-md p-4 flex justify-between items-center">
+                    <input type="text" placeholder="Rechercher..." class="border p-2 rounded w-1/3">
+                    <div class="flex items-center space-x-4">
+                        <button class="relative">
+                            <span class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">3</span>
+                            🔔
+                        </button>
+                        <img src="/path-to-admin-photo.jpg" alt="Admin" class="w-10 h-10 rounded-full">
+                    </div>
+                </header>
+                
+                <!-- Page Content -->
+                <main class="p-6">
+                    @yield('content')
+                </main>
+            </div>
+        </div>
+    @else
+        <!-- Si c'est une page d'authentification, afficher uniquement le contenu -->
+        <main class="min-h-screen flex items-center justify-center">
+            @yield('content')
+        </main>
+    @endif
+    
+    @yield('scripts')
+</body>
+</html>
