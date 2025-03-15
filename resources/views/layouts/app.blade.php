@@ -7,10 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-    <!-- Si ce n'est pas une page d'authentification, afficher le layout du dashboard -->
+
     @if (!isset($isAuthPage) || !$isAuthPage)
         <div class="min-h-screen flex">
-            <!-- Sidebar -->
+            
             <aside class="w-64 bg-white shadow-md p-4">
                 <h2 class="text-xl font-bold mb-4">Dashboard</h2>
                 <nav>
@@ -25,13 +25,15 @@
                         <li>
                             <a href="{{ route('paniers.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Panier</a>
                         </li>
+                        <li>
+                            <a href="{{ route('logout.submit') }}" class="block p-2 hover:bg-gray-100 rounded">logout</a>
+                        </li>
                     </ul>
                 </nav>
             </aside>
             
-            <!-- Main Content -->
             <div class="flex-1 flex flex-col">
-                <!-- Header -->
+                
                 <header class="bg-white shadow-md p-4 flex justify-between items-center">
                     <input type="text" placeholder="Rechercher..." class="border p-2 rounded w-1/3">
                     <div class="flex items-center space-x-4">
@@ -43,7 +45,7 @@
                     </div>
                 </header>
                 
-                <!-- Page Content -->
+                
                 <main class="p-6">
                     @yield('content')
                 </main>

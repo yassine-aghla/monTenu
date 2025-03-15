@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\PanierController;
+use App\Http\Controllers\AuthController;
 
 
 
@@ -22,25 +23,38 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 
 
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->name('password.request');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/reset-password', function () {
-    return view('auth.reset-password');
-})->name('password.reset');
+Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
 
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+
+// Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout.submit');
+// Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+// Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+// Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+// Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+Route::middleware('auth')->group(function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+});
 
 
 
 Route::get('/tenues/create', [TenueController::class, 'create'])->name('tenues.create');
 Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
-Route::get('/categories/create', [CategorieController::class, 'create'])->name('categories.create');
+Route::resource('categories', CategorieController::class);
 Route::get('/commandes/create', [CommandeController::class, 'create'])->name('commandes.create');
 Route::get('/paniers/create', [PanierController::class, 'create'])->name('paniers.create');
