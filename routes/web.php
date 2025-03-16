@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TenueController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TenueController;
 
 
 
@@ -53,6 +53,7 @@ Route::get('/dashboard', function () {
 
 
 
+Route::resource('tenues', TenueController::class);
 Route::get('/tenues/create', [TenueController::class, 'create'])->name('tenues.create');
 Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
 Route::resource('categories', CategorieController::class);

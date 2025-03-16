@@ -10,5 +10,10 @@ class Categorie extends Model
     /** @use HasFactory<\Database\Factories\CategorieFactory> */
     use HasFactory;
 
-    Protected $fillable=['name'];
+    Protected $fillable=['name','description'];
+
+    public function tenues()
+    {
+        return $this->hasMany(Tenue::class);
+    }
 }

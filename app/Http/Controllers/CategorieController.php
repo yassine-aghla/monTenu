@@ -14,8 +14,8 @@ class categorieController extends Controller
      */
     public function index()
     {
-        $categories=Categorie::all();
-        return view('categories.index',compact('categories'));
+        $categorie=Categorie::all();
+        return view('categories.index',compact('categorie'));
 
     }
 
@@ -40,32 +40,35 @@ class categorieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Categorie  $categorie)
     {
-        //
+        return view('categories.show',compact('categorie'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Categorie  $categorie)
     {
-        //
+        return view('categories.edit',compact('categorie'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(categorieRequest $request, Categorie $categorie)
     {
-        //
+        $categorie->update($request->validated());
+        return redirect()->route('categories.index')->with('succes','la categorie update avec succes');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Categorie $categorie)
     {
-        //
+       
+        $categorie->delete();
+        return redirect()->route('categories.index')->with('succes','la categorie supprime avec succes');
     }
 }
