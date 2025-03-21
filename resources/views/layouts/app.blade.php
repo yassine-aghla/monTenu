@@ -16,11 +16,11 @@
                 <nav>
                     <ul class="space-y-2">
                         <li><a href="{{ route('dashboard') }}" class="block p-2 bg-gray-200 rounded">Dashboard</a></li>
-                        <li><a href="{{ route('tenues.create') }}" class="block p-2 bg-gray-100 rounded">Manage Tenues</a></li>
+                        <li><a href="{{ route('tenues.index') }}" class="block p-2 bg-gray-100 rounded">Manage Tenues</a></li>
                         <li>
                             <a href="{{ route('clients.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Clients</a>
                         </li>
-                        <li><a href="{{ route('categories.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Categories</a></li>
+                        <li><a href="{{ route('categories.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Categories</a></li>
                         <li><a href="{{ route('commandes.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Commandes</a></li>
                         <li>
                             <a href="{{ route('paniers.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Panier</a>
@@ -41,7 +41,7 @@
                             <span class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">3</span>
                             🔔
                         </button>
-                        <img src="/path-to-admin-photo.jpg" alt="Admin" class="w-10 h-10 rounded-full">
+                        <img src="{{ asset('images/image.png') }}" alt="Admin" class="w-10 h-10 rounded-full">
                     </div>
                 </header>
                 

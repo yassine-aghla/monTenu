@@ -25,7 +25,9 @@
                 @foreach ($tenues as $tenue)
                 <tr class="hover:bg-gray-50 transition duration-200">
                     <td class="px-6 py-4 text-sm text-gray-800">{{ $tenue->nom }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-800">{{ $tenue->categorie->nom }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-800">
+                        {{ $tenue->category?->name ?? 'Aucune catégorie' }}
+                    </td>
                     <td class="px-6 py-4 text-sm text-gray-800">{{ $tenue->prix }} €</td>
                     <td class="px-6 py-4 text-sm">
                         <span class="px-2 py-1 text-xs rounded-full {{ $tenue->disponible ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">

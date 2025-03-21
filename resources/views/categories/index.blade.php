@@ -1,44 +1,57 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">Liste des Catégories</h1>
+        <a href="{{ route('categories.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
+            Créer une nouvelle catégorie
+        </a>
 
-@if(session('succes'))
-    <div class="alert alert-success">
-        {{ session('succes') }}
+        <div class="bg-white shadow-md rounded overflow-x-auto">
+            <table class="min-w-full leading-normal">
+                <thead>
+                    <tr>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Nom
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Description
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($categories as $categorie)
+                        <tr>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap">{{ $categorie->name }}</p>
+                            </td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap">{{ $categorie->description }}</p>
+                            </td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <div class="flex items-center space-x-4">
+                                    <a href="{{ route('categories.edit', $categorie->id) }}" class="text-yellow-500 hover:text-yellow-700">
+                                        Modifier
+                                    </a>
+                                    <a href="{{ route('categories.show', $categorie->id) }}" class="text-blue-500 hover:text-blue-700">
+                                        Voir
+                                    </a>
+                                    <form action="{{ route('categories.destroy', $categorie->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-500 hover:text-red-700">
+                                            Supprimer
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-@endif
-<div class="bg-white p-6 rounded-lg shadow-md mb-6">
-    <h2 class="text-xl font-semibold mb-4">Manage categorie</h2>
-    <div class="overflow-x-auto">
-        <table class="min-w-full bg-white">
-            <thead>
-                <tr>
-                    <th class="py-2 px-4 border-b">Id</th>
-                    <th class="py-2 px-4 border-b">name</th>
-                    <th class="py-2 px-4 border-b">description</th>
-                    <th class="py-2 px-4 border-b">Actions</th>
-                </tr>
-            </thead>
-            @foreach ($categorie as $cat )
-            <tbody>
-                <tr>
-                    <td class="py-2 px-4 border-b">{{$cat->id}}</td>
-                    <td class="py-2 px-4 border-b">{{$cat->name}}</td>
-                    <td class="py-2 px-4 border-b">{{$cat->description}}</td>
-                    <td class="py-2 px-4 border-b">
-                        <a href="{{ route('categories.show', $cat) }}" class="bg-blue-500 text-white px-4 py-2 rounded-md">Voir</a>
-                        <a href="{{ route('categories.edit', $cat) }}" class="bg-green-500 text-white px-4 py-2 rounded-md">Modifier</a>
-                        <form action="{{ route('categories.destroy',$cat) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Supprimer</button>
-                    </form>
-                    </td>
-                </tr>
-            </tbody>
-            
-        @endforeach
-        </table>
-    </div>
-</div>
 @endsection

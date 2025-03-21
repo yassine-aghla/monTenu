@@ -52,8 +52,10 @@ Route::get('/dashboard', function () {
 });
 
 
+Route::middleware(['auth', 'check.permission:Gérer les produits'])->group(function () {
+    Route::resource('tenues', TenueController::class);
+});
 
-Route::resource('tenues', TenueController::class);
 Route::get('/tenues/create', [TenueController::class, 'create'])->name('tenues.create');
 Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
 Route::resource('categories', CategorieController::class);

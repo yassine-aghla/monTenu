@@ -22,7 +22,7 @@
                     <a href="{{ route('login') }}" class="hover:underline">Connexion</a>
                     <a href="{{ route('register') }}" class="hover:underline">Inscription</a>
                     
-                    <a href="{{ route('password.request') }}" class="hover:underline">Mot de passe oublié ?</a>
+                    {{-- <a href="{{ route('password.request') }}" class="hover:underline">Mot de passe oublié ?</a> --}}
                 </ul>
             </nav>
         </div>

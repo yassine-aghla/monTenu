@@ -2,73 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Categorie;
 use App\Http\Requests\categorieRequest;
+use App\Models\Category;
 
-class categorieController extends Controller
+use Illuminate\Http\Request;
+
+class CategorieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $categorie=Categorie::all();
-        return view('categories.index',compact('categorie'));
-
+        $categories = Category::all();
+        return view('categories.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('categories.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(categorieRequest $request)
+    public function store(CategorieRequest $request)
     {
-        
-        Categorie::create($request->validated());
-        redirect()->route('categories.index')->with('succes','categorie creé avec succes');
+        Category::create($request->validated());
+        return redirect()->route('categories.index')->with('success', 'Catégorie créée avec succès.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Categorie  $categorie)
+    public function show(Category $category)
     {
-        return view('categories.show',compact('categorie'));
+        return view('categories.show', compact('category'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Categorie  $categorie)
+    public function edit(Category $category)
     {
-        return view('categories.edit',compact('categorie'));
+        return view('categories.edit', compact('category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(categorieRequest $request, Categorie $categorie)
+    public function update(CategorieRequest $request, Category $category)
     {
-        $categorie->update($request->validated());
-        return redirect()->route('categories.index')->with('succes','la categorie update avec succes');
+        $category->update($request->validated());
+        return redirect()->route('categories.index')->with('success', 'Catégorie mise à jour avec succès.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Categorie $categorie)
+    public function destroy(Category $category)
     {
-       
-        $categorie->delete();
-        return redirect()->route('categories.index')->with('succes','la categorie supprime avec succes');
+        $category->delete();
+        return redirect()->route('categories.index')->with('success', 'Catégorie supprimée avec succès.');
     }
 }

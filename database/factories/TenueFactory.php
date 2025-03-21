@@ -15,7 +15,7 @@ class TenueFactory extends Factory
             'nom' => $this->faker->word,
             'description' => $this->faker->sentence,
             'prix' => $this->faker->randomFloat(2, 10, 100),
-            'categorie_id' => \App\Models\Categorie::factory(),
+            'categorie_id' => \App\Models\Category::factory(),
             'taille' => $this->faker->randomElement(['S', 'M', 'L', 'XL']),
             'couleur' => $this->faker->colorName,
             'disponible' => $this->faker->boolean,
