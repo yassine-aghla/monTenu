@@ -3,7 +3,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Tenue;
 use App\Models\Category;
+use App\Models\TenueImage;
 use App\Http\Requests\TenueRequest;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 
@@ -29,15 +31,24 @@ class TenueController extends Controller
 
     public function store(TenueRequest $request)
     {
-        
         if (!auth()->user()->hasPermission('Gérer les produits')) {
             abort(403, 'Accès interdit');
         }
+    
         $data = $request->validated();
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images', 'public');
+        $tenue = Tenue::create($data);
+    
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('images', 'public');
+                $tenue->images()->create([
+                    'image_path' => $path,
+                    
+                    
+                ]);
+            }
         }
-        Tenue::create($data);
+    
         return redirect()->route('tenues.index')->with('success', 'Tenue créée avec succès.');
     }
 
@@ -63,11 +74,20 @@ class TenueController extends Controller
         if (!auth()->user()->hasPermission('Gérer les produits')) {
             abort(403, 'Accès interdit');
         }
+    
         $data = $request->validated();
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images', 'public');
-        }
         $tenue->update($data);
+    
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('images', 'public');
+                $tenue->images()->create([
+                    'image_path' => $path,
+                   
+                ]);
+            }
+        }
+    
         return redirect()->route('tenues.index')->with('success', 'Tenue mise à jour avec succès.');
     }
 
@@ -79,4 +99,16 @@ class TenueController extends Controller
         $tenue->delete();
         return redirect()->route('tenues.index')->with('success', 'Tenue supprimée avec succès.');
     }
+
+    public function destroyImage(TenueImage $image)
+{
+    if (!auth()->user()->hasPermission('Gérer les produits')) {
+        abort(403, 'Accès interdit');
+    }
+
+    Storage::disk('public')->delete($image->image_path);
+    $image->delete();
+
+    return back()->with('success', 'Image supprimée avec succès.');
+}
 }
