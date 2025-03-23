@@ -6,6 +6,7 @@
     <title>{{ $title ?? 'Dashboard' }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-gray-100">
 
@@ -17,7 +18,7 @@
                 <nav>
                     <ul class="space-y-2">
                         <li><a href="{{ route('dashboard') }}" class="block p-2 bg-gray-200 rounded">Dashboard</a></li>
-                        <li><a href="{{ route('tenues.index') }}" class="block p-2 bg-gray-100 rounded">Manage Tenues</a></li>
+                        <li><a href="{{ route('tenues.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Tenues</a></li>
                         <li>
                             <a href="{{ route('clients.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Clients</a>
                         </li>
@@ -25,6 +26,12 @@
                         <li><a href="{{ route('commandes.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Commandes</a></li>
                         <li>
                             <a href="{{ route('paniers.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Panier</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('roles.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Roles</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('permissions.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Permissions</a>
                         </li>
                         <li>
                             <a href="{{ route('logout.submit') }}" class="block p-2 hover:bg-gray-100 rounded">logout</a>
@@ -53,7 +60,7 @@
             </div>
         </div>
     @else
-        <!-- Si c'est une page d'authentification, afficher uniquement le contenu -->
+        
         <main class="min-h-screen flex items-center justify-center">
             @yield('content')
         </main>

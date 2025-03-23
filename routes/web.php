@@ -7,6 +7,8 @@ use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TenueController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
 
 
 
@@ -62,3 +64,6 @@ Route::get('/clients/create', [ClientController::class, 'create'])->name('client
 Route::resource('categories', CategorieController::class);
 Route::get('/commandes/create', [CommandeController::class, 'create'])->name('commandes.create');
 Route::get('/paniers/create', [PanierController::class, 'create'])->name('paniers.create');
+
+Route::resource('roles', RoleController::class);
+Route::resource('permissions', PermissionController::class);

@@ -39,7 +39,7 @@
                                     <a href="{{ route('categories.show', $categorie->id) }}" class="text-blue-500 hover:text-blue-700">
                                         Voir
                                     </a>
-                                    <form action="{{ route('categories.destroy', $categorie->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');" class="inline">
+                                    <form action="{{ route('categories.destroy', $categorie->id) }}" method="POST" id="delete-form-{{ $categorie->id }}" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:text-red-700">
@@ -54,4 +54,31 @@
             </table>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+           
+            const deleteForms = document.querySelectorAll('form[id^="delete-form-"]');
+    
+            deleteForms.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault(); 
+    
+                    Swal.fire({
+                        title: 'Êtes-vous sûr?',
+                        text: "Vous ne pourrez pas revenir en arrière!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Oui, supprimer!',
+                        cancelButtonText: 'Annuler'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 @endsection
