@@ -13,7 +13,7 @@ class Tenue extends Model
         'nom', 'description', 'prix', 'categorie_id', 'taille', 'couleur', 
         'disponible','date_creation',
          'materiau', 'marque', 'reference', 'promotion','league','equipe',
-         'quantite','statut','premier_prix','joueur','number'
+         'quantite','statut','premier_prix','joueur','number','brand_id'
     ];
 
     public function category()
@@ -24,5 +24,9 @@ class Tenue extends Model
     public function images()
     {
         return $this->hasMany(TenueImage::class);
+    }
+
+    public function brand() {
+        return $this->belongsTo(Brand::class); 
     }
 }

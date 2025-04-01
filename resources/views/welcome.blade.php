@@ -691,6 +691,7 @@
                 if (content.style.maxHeight) {
                     content.style.maxHeight = null;
                     icon.classList.remove('fa-chevron-up');
+                    console.log(icon)
                     icon.classList.add('fa-chevron-down');
                 } else {
                     content.style.maxHeight = content.scrollHeight + 'px';
@@ -715,4 +716,43 @@
             });
         }
     });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const faqItems = document.querySelectorAll(".accordion-item");
+    
+    faqItems.forEach(item => {
+        const button = item.querySelector("button");
+        const content = item.querySelector("div");
+        const icon = button.querySelector("i"); 
+        
+  
+        if (content) content.style.display = "none";
+        
+        button.addEventListener("click", function () {
+            const isOpen = content.style.display === "block";
+            
+            
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    const otherContent = otherItem.querySelector("div");
+                    const otherIcon = otherItem.querySelector("button i");
+                    if (otherContent) otherContent.style.display = "none";
+                    if (otherIcon) {
+                        // otherIcon.classList.remove("fa-chevron-up");
+                        otherIcon.classList.add("fa-chevron-down");
+                    }
+                }
+            });
+            
+         
+            if (content) {
+                content.style.display = isOpen ? "none" : "block";
+            }
+            if (icon) {
+                icon.classList.toggle("fa-chevron-down", isOpen);
+                icon.classList.toggle("fa-chevron-up", !isOpen);
+            }
+        });
+    });
+});
 </script>

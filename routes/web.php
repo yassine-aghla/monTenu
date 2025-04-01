@@ -9,6 +9,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TenueController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\BrandController;
+
 
 
 
@@ -48,9 +50,9 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout.submit');
 // Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
 // Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 Route::middleware('auth')->group(function () {
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
 
 
@@ -67,3 +69,4 @@ Route::get('/paniers/create', [PanierController::class, 'create'])->name('panier
 
 Route::resource('roles', RoleController::class);
 Route::resource('permissions', PermissionController::class);
+Route::resource('brands', BrandController::class);

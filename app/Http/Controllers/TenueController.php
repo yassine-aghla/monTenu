@@ -16,7 +16,7 @@ class TenueController extends Controller
         if (!auth()->user()->hasPermission('Gérer les produits')) {
             abort(403, 'Accès interdit');
         }
-        $tenues = Tenue::with('category')->get();
+        $tenues = Tenue::with('category','Brand')->get();
         return view('tenues.index', compact('tenues'));
     }
 
@@ -26,6 +26,7 @@ class TenueController extends Controller
             abort(403, 'Accès interdit');
         }
         $categories = Category::all();
+        $brands= Brand::all();
         return view('tenues.create', compact('categories'));
     }
 
