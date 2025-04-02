@@ -33,7 +33,7 @@ class TenueRequest extends FormRequest
             'statut' => 'required|in:published,pending,archive', 
             'premier_prix' => 'nullable|numeric',
              'joueur'=>'nullable|string',
-             'number'=>'nullable|integer',
+             'number' => 'nullable|integer|min:1|max:99',
              'brand_id' => 'required|exists:brands,id',
         ];
     }

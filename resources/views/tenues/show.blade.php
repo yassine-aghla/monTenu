@@ -52,10 +52,11 @@
                         <p><strong class="text-gray-600">Nom :</strong> <span class="text-gray-800">{{ $tenue->nom }}</span></p>
                         <p><strong class="text-gray-600">Description :</strong> <span class="text-gray-800">{{ $tenue->description }}</span></p>
                         <p><strong class="text-gray-600">Prix :</strong> <span class="text-gray-800">{{ $tenue->prix }} €</span></p>
-                        <p><strong class="text-gray-600">joueur :</strong> <span class="text-gray-800">{{ $tenue->joueur }} €</span></p>
-                        <p><strong class="text-gray-600">number :</strong> <span class="text-gray-800">{{ $tenue->number }} €</span></p>
+                        <p><strong class="text-gray-600">joueur :</strong> <span class="text-gray-800">{{ $tenue->joueur }} </span></p>
+                        <p><strong class="text-gray-600">number :</strong> <span class="text-gray-800">{{ $tenue->number }} </span></p>
                         <p><strong class="text-gray-600">Premier Prix :</strong> <span class="text-gray-800">{{ $tenue->premier_prix }} €</span></p>
                         <p><strong class="text-gray-600">Catégorie :</strong> <span class="text-gray-800">{{ $tenue->category->name }}</span></p>
+                        <p><strong class="text-gray-600">Brand:</strong> <span class="text-gray-800">{{ $tenue->Brand->nom }}</span></p>
                     </div>
                 </div>
 

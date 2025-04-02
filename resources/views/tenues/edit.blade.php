@@ -33,6 +33,19 @@
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
+              <!-- brand -->
+              <div>
+                <label for="brand_id" class="block text-sm font-medium text-gray-700">Brand</label>
+                <select name="brand_id" id="brand_id"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('categorie_id') border-red-500 @enderror">
+                    @foreach ($brands as $brand)
+                    <option value="{{ $brand->id }}" {{ old('brand_id', $tenue->brand_id) == $brand->id ? 'selected' : '' }}>{{ $brand->nom }}</option>
+                    @endforeach
+                </select>
+                {{-- @error('categorie_id')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror --}}
+            </div>
         </div>
 
         <!-- Description -->

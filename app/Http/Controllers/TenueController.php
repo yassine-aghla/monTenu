@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tenue;
 use App\Models\Category;
+use App\Models\Brand;
 use App\Models\TenueImage;
 use App\Http\Requests\TenueRequest;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +28,7 @@ class TenueController extends Controller
         }
         $categories = Category::all();
         $brands= Brand::all();
-        return view('tenues.create', compact('categories'));
+        return view('tenues.create', compact('categories','brands'));
     }
 
     public function store(TenueRequest $request)
@@ -67,7 +68,8 @@ class TenueController extends Controller
             abort(403, 'Accès interdit');
         }
         $categories = Category::all();
-        return view('tenues.edit', compact('tenue', 'categories'));
+        $brands= Brand::all();
+        return view('tenues.edit', compact('tenue', 'categories','brands'));
     }
 
     public function update(TenueRequest $request, Tenue $tenue)
