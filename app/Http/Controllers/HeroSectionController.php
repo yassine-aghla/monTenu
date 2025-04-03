@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\HeroSection;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Requests\HeroSectionRequest;
+use Illuminate\Support\Facades\Storage;
 
 class HeroSectionController extends Controller
 {
@@ -18,19 +19,15 @@ class HeroSectionController extends Controller
         return view('hero-sections.create');
     }
 
-    public function store(Request $request)
+    public function store(HeroSectionRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'thumbnail' => 'required|image|max:2048',
-        ]);
-
+        $validated = $request->validated();
+        
         $path = $request->file('thumbnail')->store('hero-images', 'public');
 
         HeroSection::create([
-            'name' => $request->name,
-            'description' => $request->description,
+            'name' => $validated['name'],
+            'description' => $validated['description'],
             'thumbnail_url' => $path,
         ]);
 
@@ -42,17 +39,13 @@ class HeroSectionController extends Controller
         return view('hero-sections.edit', compact('heroSection'));
     }
 
-    public function update(Request $request, HeroSection $heroSection)
+    public function update(HeroSectionRequest $request, HeroSection $heroSection)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'thumbnail' => 'nullable|image|max:2048',
-        ]);
+        $validated = $request->validated();
 
         $data = [
-            'name' => $request->name,
-            'description' => $request->description,
+            'name' => $validated['name'],
+            'description' => $validated['description'],
         ];
 
         if ($request->hasFile('thumbnail')) {

@@ -36,9 +36,9 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap space-x-2">
                         <a href="{{ route('hero-sections.edit', $hero) }}" class="text-yellow-500 hover:text-yellow-700">Éditer</a>
-                        <form action="{{ route('hero-sections.destroy', $hero) }}" method="POST" class="inline">
+                        <form action="{{ route('hero-sections.destroy', $hero) }}" method="POST" class="inline delete-form">
                             @csrf @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Supprimer cette hero section?')">Supprimer</button>
+                            <button type="submit" class="text-red-500 hover:text-red-700" id="delete-form-{{ $hero->id }}">Supprimer</button>
                         </form>
                     </td>
                 </tr>
@@ -47,4 +47,32 @@
         </table>
     </div>
 </div>
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+        
+        const deleteForms = document.querySelectorAll('.delete-form');
+
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); 
+
+                Swal.fire({
+                    title: 'Êtes-vous sûr ?',
+                    text: "Vous ne pourrez pas annuler cette action !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, supprimer !',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
 @endsection

@@ -25,6 +25,7 @@ class TenueFactory extends Factory
             'marque' => $this->faker->company,
             'reference' => $this->faker->uuid,
             'promotion' => $this->faker->numberBetween(0, 50),
+            'brand_id' => \App\Models\Brand::factory(),
         ];
     }
 }
