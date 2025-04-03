@@ -94,12 +94,10 @@
             </div>
             <nav class="hidden md:block">
                 <ul class="flex space-x-6">
-                    <li><a href="#" class="nav-link font-medium">Accueil</a></li>
-                    <li><a href="#" class="nav-link font-medium">Catalogue</a></li>
-                    <li><a href="#" class="nav-link font-medium">Nouveautés</a></li>
-                    <li><a href="#" class="nav-link font-medium">Équipes</a></li>
-                    <li><a href="panier.html" class="nav-link font-medium">Panier</a></li>
-                    <li><a href="contact.html" class="nav-link font-medium">Contact</a></li>
+                    <li><a href="{{ route('home') }}" class="nav-link font-medium">Accueil</a></li>
+                    <li><a href="{{ route('shop.index') }}" class="nav-link font-medium">Boutique</a></li>
+                    <li><a href="" class="nav-link font-medium">À propos</a></li>
+                    <li><a href="" class="nav-link font-medium">Contact</a></li>
                 </ul>
             </nav>
             <div class="flex items-center space-x-4">

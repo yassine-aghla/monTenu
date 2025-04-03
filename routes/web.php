@@ -11,6 +11,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HeroSectionController;
+use App\Http\Controllers\ShopController;
 
 
 
@@ -21,6 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/', [TenueController::class, 'frontendIndex'])->name('home');
+Route::get('/boutique', [ShopController::class, 'index'])->name('shop.index');
 
 
 Route::get('/login', function () {
