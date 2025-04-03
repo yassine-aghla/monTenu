@@ -37,6 +37,9 @@
                             <a href="{{ route('brands.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Brands</a>
                         </li>
                         <li>
+                            <a href="{{ route('hero-sections.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Sliders</a>
+                        </li>
+                        <li>
                             <a href="{{ route('logout.submit') }}" class="block p-2 hover:bg-gray-100 rounded">logout</a>
                         </li>
 

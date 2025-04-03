@@ -12,4 +12,5 @@ class HeroSection extends Model
     {
         return self::where('is_active', true)->first();
     }
+
 }

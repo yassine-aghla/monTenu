@@ -10,6 +10,7 @@ use App\Http\Controllers\TenueController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\HeroSectionController;
 
 
 
@@ -70,3 +71,5 @@ Route::get('/paniers/create', [PanierController::class, 'create'])->name('panier
 Route::resource('roles', RoleController::class);
 Route::resource('permissions', PermissionController::class);
 Route::resource('brands', BrandController::class);
+Route::resource('hero-sections', HeroSectionController::class);
+Route::put('hero-sections/{hero_section}/activate', [HeroSectionController::class, 'setActive'])->name('hero-sections.activate');
