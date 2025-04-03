@@ -114,4 +114,20 @@ class TenueController extends Controller
 
     return back()->with('success', 'Image supprimée avec succès.');
 }
+
+
+public function frontendIndex()
+{
+     $featuredTenues = Tenue::where('disponible', true)
+                          ->where(function($query) {
+                              $query->where('statut', 'published')
+                                    ->orWhere('promotion', '>', 0);
+                          })
+                          ->with('brand', 'category', 'images')
+                          ->orderBy('created_at', 'desc')
+                          ->take(8)
+                          ->get();
+
+    return view('welcome', compact( 'featuredTenues'));
+}
 }

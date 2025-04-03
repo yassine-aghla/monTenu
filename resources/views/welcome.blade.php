@@ -204,48 +204,7 @@
         </div>
     </section>
 
-    <!-- Catégories -->
-    <section id="categories" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Explorez nos catégories</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Découvrez la plus grande sélection de maillots officiels, rétro et exclusifs pour tous les amateurs de football.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <a href="#" class="block group">
-                    <div class="relative h-64 rounded-lg overflow-hidden shadow-md">
-                        <img src="/api/placeholder/400/320" alt="Maillots de clubs" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900 to-transparent opacity-70"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <h3 class="text-white text-xl font-bold">Maillots de Clubs</h3>
-                            <p class="text-blue-100">Plus de 200 modèles</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="block group">
-                    <div class="relative h-64 rounded-lg overflow-hidden shadow-md">
-                        <img src="/api/placeholder/400/320" alt="Maillots des équipes nationales" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900 to-transparent opacity-70"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <h3 class="text-white text-xl font-bold">Équipes Nationales</h3>
-                            <p class="text-blue-100">Supportez votre pays</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="block group">
-                    <div class="relative h-64 rounded-lg overflow-hidden shadow-md">
-                        <img src="/api/placeholder/400/320" alt="Maillots vintage et rétro" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900 to-transparent opacity-70"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <h3 class="text-white text-xl font-bold">Collection Vintage</h3>
-                            <p class="text-blue-100">Les classiques inoubliables</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Produits en vedette -->
     <section id="nouveautes" class="py-16 bg-white">
@@ -255,88 +214,52 @@
                     <span class="text-blue-600 font-semibold uppercase tracking-wider">Découvrez</span>
                     <h2 class="text-3xl font-bold text-gray-900">Nouveautés & Meilleures Ventes</h2>
                 </div>
-                <a href="#" class="text-blue-600 font-medium hover:text-blue-800 flex items-center">
+                <a href="" class="text-blue-600 font-medium hover:text-blue-800 flex items-center">
                     Voir tout le catalogue
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Produit 1 -->
+                @foreach($featuredTenues as $tenue)
                 <div class="product-card bg-white rounded-xl overflow-hidden shadow-md">
                     <div class="relative">
-                        <img src="{{asset('images/sevilla.webp') }}" alt="Maillot Séville FC" class="w-full h-64 object-cover">
-                        <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">-15%</span>
+                        @if($tenue->images->first())
+                            <img src="{{ asset('storage/'.$tenue->images->first()->image_path) }}" 
+                                 alt="{{ $tenue->nom }}" 
+                                 class="w-full h-64 object-cover">
+                        @else
+                            <img src="{{ asset('images/placeholder.jpg') }}" 
+                                 alt="Placeholder" 
+                                 class="w-full h-64 object-cover">
+                        @endif
+                        
+                        @if($tenue->promotion > 0)
+                            <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                -{{ $tenue->promotion }}%
+                            </span>
+                        @elseif($tenue->created_at->diffInDays() < 30)
+                            <span class="absolute top-3 right-3 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                Nouveau
+                            </span>
+                        @endif
                     </div>
                     <div class="p-6">
-                        <span class="text-sm text-blue-600 font-medium">Séville FC</span>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">Maillot Domicile 2024/25</h3>
+                        <span class="text-sm text-blue-600 font-medium">{{ $tenue->brand->nom ?? 'Marque inconnue' }}</span>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $tenue->nom }}</h3>
                         <div class="flex justify-between items-center">
                             <div>
-                                <span class="text-gray-400 line-through text-sm">€89.99</span>
-                                <span class="text-blue-800 font-bold text-xl">€79.99</span>
+                                @if($tenue->promotion > 0)
+                                    <span class="text-gray-400 line-through text-sm">€{{ number_format($tenue->prix, 2) }}</span>
+                                    <span class="text-blue-800 font-bold text-xl">
+                                        €{{ number_format($tenue->prix * (1 - $tenue->promotion/100), 2) }}
+                                    </span>
+                                @else
+                                    <span class="text-blue-800 font-bold text-xl">€{{ number_format($tenue->prix, 2) }}</span>
+                                @endif
                             </div>
                             <div class="flex items-center">
-                                <div class="flex text-yellow-400 mr-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="text-gray-500 text-xs">(42)</span>
-                            </div>
-                        </div>
-                        <button class="mt-4 animated-button bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full flex items-center justify-center">
-                            <i class="fas fa-shopping-cart mr-2"></i>Ajouter au panier
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Produit 2 -->
-                <div class="product-card bg-white rounded-xl overflow-hidden shadow-md">
-                    <div class="relative">
-                        <img src="{{asset('images/milan maldini.webp') }}" alt="Maillot AC Milan" class="w-full h-64 object-cover">
-                        <span class="absolute top-3 right-3 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">Nouveau</span>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-sm text-blue-600 font-medium">AC Milan</span>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">Maillot Extérieur 2024/25</h3>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="text-blue-800 font-bold text-xl">€85.99</span>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="flex text-yellow-400 mr-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <span class="text-gray-500 text-xs">(67)</span>
-                            </div>
-                        </div>
-                        <button class="mt-4 animated-button bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full flex items-center justify-center">
-                            <i class="fas fa-shopping-cart mr-2"></i>Ajouter au panier
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Produit 3 -->
-                <div class="product-card bg-white rounded-xl overflow-hidden shadow-md">
-                    <div class="relative">
-                        <img src="{{asset('images/man utd.webp') }}" alt="Maillot Manchester United" class="w-full h-64 object-cover">
-                        <span class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">Populaire</span>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-sm text-blue-600 font-medium">Manchester United</span>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">Maillot Third 2024/25</h3>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="text-blue-800 font-bold text-xl">€90.99</span>
-                            </div>
-                            <div class="flex items-center">
+                                <!-- Ici vous pourriez ajouter un système de notation -->
                                 <div class="flex text-yellow-400 mr-2">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -344,7 +267,6 @@
                                     <i class="fas fa-star"></i>
                                     <i class="far fa-star"></i>
                                 </div>
-                                <span class="text-gray-500 text-xs">(38)</span>
                             </div>
                         </div>
                         <button class="mt-4 animated-button bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full flex items-center justify-center">
@@ -352,40 +274,11 @@
                         </button>
                     </div>
                 </div>
-                
-                <!-- Produit 4 -->
-                <div class="product-card bg-white rounded-xl overflow-hidden shadow-md">
-                    <div class="relative">
-                        <img src="{{asset('images/burussia dortmund.webp') }}" alt="Maillot Borussia Dortmund" class="w-full h-64 object-cover">
-                        <span class="absolute top-3 right-3 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full">Édition Limitée</span>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-sm text-blue-600 font-medium">Borussia Dortmund</span>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">Maillot Domicile 2024/25</h3>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="text-blue-800 font-bold text-xl">€85.99</span>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="flex text-yellow-400 mr-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="text-gray-500 text-xs">(52)</span>
-                            </div>
-                        </div>
-                        <button class="mt-4 animated-button bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full flex items-center justify-center">
-                            <i class="fas fa-shopping-cart mr-2"></i>Ajouter au panier
-                        </button>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
-
+    
     <!-- Bannière promo -->
     <section class="py-10 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
         <div class="container mx-auto px-4">

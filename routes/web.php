@@ -20,6 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', [TenueController::class, 'frontendIndex'])->name('home');
+
 
 Route::get('/login', function () {
     return view('auth.login');
