@@ -85,7 +85,7 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Header avec navbar améliorée -->
+  
     <header class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-4 sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center">
@@ -96,6 +96,16 @@
                 <ul class="flex space-x-6">
                     <li><a href="{{ route('home') }}" class="nav-link font-medium">Accueil</a></li>
                     <li><a href="{{ route('shop.index') }}" class="nav-link font-medium">Boutique</a></li>
+                    <li>
+                        <a href="{{ route('wishlist.index') }}" class="nav-link font-medium flex items-center">
+                            <i class="far fa-heart mr-1"></i> Wishlist
+                            @auth
+                                <span class="ml-1 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                                    {{ auth()->user()->wishlistTenues->count() }}
+                                </span>
+                            @endauth
+                        </a>
+                    </li>
                     <li><a href="" class="nav-link font-medium">À propos</a></li>
                     <li><a href="" class="nav-link font-medium">Contact</a></li>
                 </ul>
@@ -222,7 +232,7 @@
                 @foreach($featuredTenues as $tenue)
                 <div class="product-card bg-white rounded-xl overflow-hidden shadow-md">
                     <div class="relative">
-                        @if($tenue->images->first())
+              @if($tenue->images->first())
                             <img src="{{ asset('storage/'.$tenue->images->first()->image_path) }}" 
                                  alt="{{ $tenue->nom }}" 
                                  class="w-full h-64 object-cover">
@@ -568,7 +578,7 @@
                     </li>
                     <li class="flex items-center">
                         <i class="fas fa-phone mr-3 text-blue-300"></i>
-                        <span class="text-blue-200">+33 1 23 45 67 89</span>
+                        <span class="text-blue-200">+212 6 53 68 77 51</span>
                     </li>
                     <li class="flex items-center">
                         <i class="fas fa-envelope mr-3 text-blue-300"></i>

@@ -85,7 +85,7 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Header avec navbar améliorée -->
+  
     <header class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-4 sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center">
@@ -96,6 +96,16 @@
                 <ul class="flex space-x-6">
                     <li><a href="{{ route('home') }}" class="nav-link font-medium">Accueil</a></li>
                     <li><a href="{{ route('shop.index') }}" class="nav-link font-medium">Boutique</a></li>
+                    <li>
+                        <a href="{{ route('wishlist.index') }}" class="nav-link font-medium flex items-center">
+                            <i class="far fa-heart mr-1"></i> Wishlist
+                            @auth
+                                <span class="ml-1 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                                    {{ auth()->user()->wishlistTenues->count() }}
+                                </span>
+                            @endauth
+                        </a>
+                    </li>
                     <li><a href="" class="nav-link font-medium">À propos</a></li>
                     <li><a href="" class="nav-link font-medium">Contact</a></li>
                 </ul>
@@ -113,14 +123,14 @@
     
 <div class="container mx-auto px-4 py-8">
     <div class="flex flex-col md:flex-row gap-8">
-        <!-- Sidebar avec filtres -->
+      
         <div class="md:w-1/4 bg-white p-6 rounded-lg shadow">
             <h2 class="text-xl font-bold mb-4">Filtrer</h2>
             
-            <!-- Formulaire global -->
+           
             <form action="{{ route('shop.index') }}" method="GET" id="filter-form">
                 
-                <!-- Recherche -->
+              
                 <div class="mb-6">
                     <input type="text" name="search" placeholder="Rechercher..." 
                            class="w-full px-4 py-2 border rounded-lg" 
@@ -128,7 +138,7 @@
                            onchange="document.getElementById('filter-form').submit()">
                 </div>
 
-                <!-- Filtre par marque -->
+                
                 <div class="mb-6">
                     <h3 class="font-semibold mb-2">Marque</h3>
                     <select name="brand" class="w-full px-4 py-2 border rounded-lg"
@@ -143,7 +153,7 @@
                     </select>
                 </div>
 
-                <!-- Filtre par catégorie -->
+                
                 <div class="mb-6">
                     <h3 class="font-semibold mb-2">Catégorie</h3>
                     <select name="category" class="w-full px-4 py-2 border rounded-lg"
@@ -158,7 +168,7 @@
                     </select>
                 </div>
 
-                <!-- Filtre par équipe -->
+               
                 <div class="mb-6">
                     <h3 class="font-semibold mb-2">Équipe</h3>
                     <input type="text" name="equipe" placeholder="Filtrer par équipe..."
@@ -167,7 +177,7 @@
                            onchange="document.getElementById('filter-form').submit()">
                 </div>
 
-                <!-- Bouton de réinitialisation -->
+               
                 <a href="{{ route('shop.index') }}" class="text-blue-600 hover:text-blue-800 text-sm">
                     Réinitialiser les filtres
                 </a>
@@ -185,13 +195,33 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($tenues as $tenue)
-                <div class="bg-white rounded-lg shadow overflow-hidden">
-                    <!-- Votre carte produit ici -->
-                    <a href="{{ route('tenues.show', $tenue) }}">
+                <div class="bg-white rounded-lg shadow overflow-hidden relative">
+                   
+                    @auth
+        @if(auth()->user()->wishlistTenues->contains($tenue->id))
+            <form action="{{ route('wishlist.destroy', $tenue) }}" method="POST" class="absolute top-2 right-2">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-500 hover:text-red-700">
+                    <i class="fas fa-heart"></i>
+                </button>
+            </form>
+        @else
+            <form action="{{ route('wishlist.store', $tenue) }}" method="POST" class="absolute top-2 right-2">
+                @csrf
+                <button type="submit" class="text-gray-400 hover:text-red-500">
+                    <i class="far fa-heart"></i>
+                </button>
+            </form>
+        @endif
+    @endauth
+
+                    
+                    
                         <img src="{{ $tenue->images->first() ? asset('storage/'.$tenue->images->first()->image_path) : asset('images/placeholder.jpg') }}" 
                              alt="{{ $tenue->nom }}" 
                              class="w-full h-48 object-cover">
-                    </a>
+                   
                     <div class="p-4">
                         <h3 class="font-bold text-lg">{{ $tenue->nom }}</h3>
                         <p class="text-gray-600">{{ $tenue->brand->nom }}</p>
@@ -200,8 +230,6 @@
                 </div>
                 @endforeach
             </div>
-
-            <!-- Pagination -->
             <div class="mt-8">
                 {{ $tenues->appends(request()->query())->links() }}
             </div>

@@ -67,4 +67,15 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function wishlists()
+{
+    return $this->hasMany(Wishlist::class);
+}
+
+public function wishlistTenues()
+{
+    return $this->belongsToMany(Tenue::class, 'wishlists')
+               ->withTimestamps();
+}
 }

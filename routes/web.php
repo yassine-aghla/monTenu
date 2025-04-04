@@ -12,7 +12,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\ShopController;
-
+use App\Http\Controllers\WishlistController;
 
 
 
@@ -77,3 +77,6 @@ Route::resource('permissions', PermissionController::class);
 Route::resource('brands', BrandController::class);
 Route::resource('hero-sections', HeroSectionController::class);
 Route::put('hero-sections/{hero_section}/activate', [HeroSectionController::class, 'setActive'])->name('hero-sections.activate');
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+Route::post('/wishlist/{tenue}', [WishlistController::class, 'store'])->name('wishlist.store');
+Route::delete('/wishlist/{tenue}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
