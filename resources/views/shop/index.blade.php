@@ -82,6 +82,18 @@
         .nav-link:hover:after {
             width: 100%;
         }
+    
+        .fa-heart, .fa-spinner {
+    transition: all 0.3s ease;
+}
+
+.wishlist-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    outline: none;
+}
     </style>
 </head>
 <body class="bg-gray-50">
@@ -198,23 +210,20 @@
                 <div class="bg-white rounded-lg shadow overflow-hidden relative">
                    
                     @auth
-        @if(auth()->user()->wishlistTenues->contains($tenue->id))
-            <form action="{{ route('wishlist.destroy', $tenue) }}" method="POST" class="absolute top-2 right-2">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-red-500 hover:text-red-700">
-                    <i class="fas fa-heart"></i>
-                </button>
-            </form>
-        @else
-            <form action="{{ route('wishlist.store', $tenue) }}" method="POST" class="absolute top-2 right-2">
-                @csrf
-                <button type="submit" class="text-gray-400 hover:text-red-500">
-                    <i class="far fa-heart"></i>
-                </button>
-            </form>
-        @endif
-    @endauth
+                    @if(auth()->user()->wishlistTenues->contains($tenue->id))
+                        <button onclick="toggleWishlist({{ $tenue->id }}, false)" 
+                                class="text-red-500 hover:text-red-700 wishlist-btn-{{ $tenue->id }}"
+                                title="Retirer de la wishlist">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    @else
+                        <button onclick="toggleWishlist({{ $tenue->id }}, true)" 
+                                class="text-gray-400 hover:text-red-500 wishlist-btn-{{ $tenue->id }}"
+                                title="Ajouter à la wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    @endif
+                @endauth
 
                     
                     
@@ -246,4 +255,59 @@
         });
     });
 });
+function toggleWishlist(tenueId, addToWishlist) {
+    const url = addToWishlist 
+        ? `/wishlist/${tenueId}`
+        : `/wishlist/${tenueId}`;
+    
+    const method = addToWishlist ? 'POST' : 'DELETE';
+    const btn = document.querySelector(`.wishlist-btn-${tenueId}`);
+    
+    
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    btn.disabled = true;
+
+    
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Erreur réseau');
+        return response.json();
+    })
+    .then(data => {
+    
+        if (addToWishlist) {
+            btn.innerHTML = '<i class="fas fa-heart"></i>';
+            btn.classList.remove('text-gray-400');
+            btn.classList.add('text-red-500');
+            btn.onclick = () => toggleWishlist(tenueId, false);
+        } else {
+            btn.innerHTML = '<i class="far fa-heart"></i>';
+            btn.classList.remove('text-red-500');
+            btn.classList.add('text-gray-400');
+            btn.onclick = () => toggleWishlist(tenueId, true);
+        }
+        
+       
+        if (data.wishlistCount !== undefined) {
+            const wishlistCounter = document.querySelector('.wishlist-counter');
+            if (wishlistCounter) {
+                wishlistCounter.textContent = data.wishlistCount;
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        btn.innerHTML = '<i class="far fa-heart"></i>';
+        alert('Une erreur est survenue');
+    })
+    .finally(() => {
+        btn.disabled = false;
+    });
+}
 </script>

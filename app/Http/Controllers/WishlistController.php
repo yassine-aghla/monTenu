@@ -18,17 +18,24 @@ class WishlistController extends Controller
         return view('wishlist.index', compact('wishlistItems'));
     }
 
-    public function store(Tenue $tenue)
-    {
-        Auth::user()->wishlistTenues()->attach($tenue->id);
-        
-        return back()->with('success', 'Produit ajouté à votre wishlist');
+   
+public function store(Tenue $tenue)
+{
+    if (auth()->user()->wishlistTenues()->where('tenue_id', $tenue->id)->exists()) {
+        return response()->json(['message' => 'Déjà dans la wishlist']);
     }
 
-    public function destroy(Tenue $tenue)
-    {
-        Auth::user()->wishlistTenues()->detach($tenue->id);
-        
-        return back()->with('success', 'Produit retiré de votre wishlist');
-    }
+    auth()->user()->wishlistTenues()->attach($tenue->id);
+    
+    return response()->json([
+        'message' => 'Ajouté à la wishlist',
+        'wishlistCount' => auth()->user()->wishlistTenues()->count()
+    ]);
+}
+
+public function destroy(Tenue $tenue)
+{
+    auth()->user()->wishlistTenues()->detach($tenue->id);
+    return back()->with('success', 'Produit retiré de votre wishlist');
+}
 }
