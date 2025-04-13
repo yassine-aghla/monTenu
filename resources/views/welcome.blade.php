@@ -188,7 +188,7 @@
 </section>
 @endif
 
-    <!-- Bannière statistiques -->
+    
     <section class="bg-white py-6 shadow-md">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
@@ -214,7 +214,7 @@
 
 
 
-    <!-- Produits en vedette -->
+   
     <section id="nouveautes" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-end mb-10">
@@ -267,7 +267,7 @@
                                 @endif
                             </div>
                             <div class="flex items-center">
-                                <!-- Ici vous pourriez ajouter un système de notation -->
+                                
                                 <div class="flex text-yellow-400 mr-2">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -286,8 +286,7 @@
             </div>
         </div>
     </section>
-    
-    <!-- Bannière promo -->
+  
     <section class="py-10 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center justify-between">
@@ -307,7 +306,7 @@
         </div>
     </section>
 
-    <!-- Section Avis des Clients -->
+   
     <section id="avis" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
