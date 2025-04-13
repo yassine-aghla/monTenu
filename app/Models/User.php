@@ -78,4 +78,9 @@ public function wishlistTenues()
     return $this->belongsToMany(Tenue::class, 'wishlists')
                ->withTimestamps();
 }
+
+public function carts()
+{
+    return $this->hasMany(Cart::class);
+}
 }

@@ -13,7 +13,9 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\WishlistController;
-
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PaymentController;
 
 
 
@@ -82,4 +84,19 @@ Route::post('/wishlist/{tenue}', [WishlistController::class, 'store'])->name('wi
 Route::delete('/wishlist/{tenue}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
 
 
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/{tenue}', [CartController::class, 'store'])->name('cart.store');
+    Route::patch('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
+    
+    
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    
+   
+    Route::get('/payment', [PaymentController::class, 'create'])->name('payment.create');
+    Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 
