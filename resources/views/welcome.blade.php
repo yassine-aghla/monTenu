@@ -614,12 +614,7 @@
                         <a href="#" class="text-blue-300 hover:text-white text-sm transition mb-2 md:mb-0">Mentions légales</a>
                     </div>
                 </div>
-                {{-- <div class="flex space-x-2 mt-4 md:mt-0">
-                    <img src="/api/placeholder/40/25" alt="Visa" class="h-8">
-                    <img src="/api/placeholder/40/25" alt="Mastercard" class="h-8">
-                    <img src="/api/placeholder/40/25" alt="PayPal" class="h-8">
-                    <img src="/api/placeholder/40/25" alt="Apple Pay" class="h-8">
-                </div> --}}
+                
             </div>
         </div>
     </div>
