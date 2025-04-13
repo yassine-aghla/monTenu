@@ -287,10 +287,10 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="{{ route('cart.store', $tenue) }}" method="POST">
+                        <form action="{{ route('cart.add', $tenue->id) }}" method="POST">
                             @csrf
-                            <button type="submit" class="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-                                <i class="fas fa-cart-plus mr-2"></i>Ajouter au panier
+                            <button type="submit" class="mt-4 animated-button bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full flex items-center justify-center">
+                                <i class="fas fa-shopping-cart mr-2"></i>Ajouter au panier
                             </button>
                         </form>
                     </div>

@@ -4,44 +4,53 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Tenue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     public function index()
     {
-        $cartItems = auth()->user()->carts()->with('tenue.images')->get();
-        $total = $cartItems->sum(function($item) {
+        $cartItems = Auth::user()->carts()->with('tenue')->get();
+        $total = $cartItems->sum(function ($item) {
             return $item->tenue->prix * $item->quantity;
         });
         
         return view('cart.index', compact('cartItems', 'total'));
     }
 
-    public function store(Tenue $tenue, Request $request)
+    public function add(Tenue $tenue, Request $request)
     {
-        $cartItem = auth()->user()->carts()->where('tenue_id', $tenue->id)->first();
-        
+        $cartItem = Cart::where('user_id', auth()->id())
+                        ->where('tenue_id', $tenue->id)
+                        ->first();
+
         if ($cartItem) {
             $cartItem->increment('quantity');
         } else {
-            auth()->user()->carts()->create([
+            Cart::create([
+                'user_id' => auth()->id(),
                 'tenue_id' => $tenue->id,
-                'quantity' => $request->quantity ?? 1
+                'quantity' => 1
             ]);
         }
-        
-        return back()->with('success', 'Produit ajouté au panier');
+
+        return redirect()->back()->with('success', 'Produit ajouté au panier');
     }
 
     public function update(Cart $cart, Request $request)
     {
+        $request->validate([
+            'quantity' => 'required|numeric|min:1'
+        ]);
+
         $cart->update(['quantity' => $request->quantity]);
-        return back()->with('success', 'Panier mis à jour');
+
+        return redirect()->back()->with('success', 'Panier mis à jour');
     }
 
-    public function destroy(Cart $cart)
+    public function remove(Cart $cart)
     {
         $cart->delete();
-        return back()->with('success', 'Produit retiré du panier');
+        return redirect()->back()->with('success', 'Produit retiré du panier');
     }
 }
