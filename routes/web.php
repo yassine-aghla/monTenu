@@ -80,3 +80,6 @@ Route::put('hero-sections/{hero_section}/activate', [HeroSectionController::clas
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::post('/wishlist/{tenue}', [WishlistController::class, 'store'])->name('wishlist.store');
 Route::delete('/wishlist/{tenue}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+
+
+
