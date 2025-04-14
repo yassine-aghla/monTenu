@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Header avec titre et filtres -->
+
 <header class="bg-white shadow-sm mb-6 p-6 flex justify-between items-center rounded-lg">
     <h1 class="text-2xl font-bold text-gray-800">Tableau de bord</h1>
     <div class="flex space-x-4">
@@ -20,11 +20,11 @@
     </div>
 </header>
 
-<!-- Main Content -->
+
 <main class="space-y-6">
-    <!-- Cartes de statistiques -->
+   
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Carte de statistique 1 -->
+      
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="p-6">
                 <div class="flex items-center">
