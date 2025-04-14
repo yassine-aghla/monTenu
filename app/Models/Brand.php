@@ -8,7 +8,7 @@ class Brand extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'description'];
+    protected $fillable = ['nom', 'description','logo'];
 
     
     public function tenues()

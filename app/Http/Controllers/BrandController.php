@@ -20,8 +20,14 @@ class BrandController extends Controller
 
     public function store(BrandRequest $request)
     {
-        Brand::create($request->validated());
-        return redirect()->route('brands.index')->with('success', 'Marque créée !');
+     $data = $request->validated();
+    
+    if ($request->hasFile('logo')) {
+        $data['logo'] = $request->file('logo')->store('brands', 'public');
+    }
+    
+    Brand::create($data);
+    return redirect()->route('brands.index')->with('success', 'Marque créée !');
     }
 
     public function edit(Brand $brand)
