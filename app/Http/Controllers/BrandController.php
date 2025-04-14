@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Requests\BrandRequest;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
