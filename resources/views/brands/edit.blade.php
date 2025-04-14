@@ -49,7 +49,24 @@
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
-
+              
+            <div>
+                <label for="logo" class="block text-sm font-medium text-gray-700 mb-1">Logo</label>
+                @if($brand->logo)
+                    <div class="mb-2">
+                        <img src="{{ asset('storage/'.$brand->logo) }}" alt="Logo {{ $brand->nom }}" class="h-20 w-auto">
+                    </div>
+                @endif
+                <input 
+                    type="file" 
+                    id="logo"
+                    name="logo" 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                >
+                @error('logo')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
     
             <div class="flex justify-end space-x-4 pt-4 border-t">
                 <a href="{{ route('brands.index') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-200">
