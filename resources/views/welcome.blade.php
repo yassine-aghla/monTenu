@@ -106,6 +106,16 @@
                             @endauth
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('cart.index') }}" class="nav-link font-medium flex items-center">
+                            <i class="fas fa-shopping-cart mr-1"></i> Panier
+                            @auth
+                                <span class="ml-1 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                                    {{ auth()->user()->carts->count() }}
+                                </span>
+                            @endauth
+                        </a>
+                    </li>
                     <li><a href="" class="nav-link font-medium">À propos</a></li>
                     <li><a href="" class="nav-link font-medium">Contact</a></li>
                 </ul>
@@ -188,7 +198,7 @@
 </section>
 @endif
 
-    <!-- Bannière statistiques -->
+    
     <section class="bg-white py-6 shadow-md">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
@@ -214,7 +224,7 @@
 
 
 
-    <!-- Produits en vedette -->
+   
     <section id="nouveautes" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-end mb-10">
@@ -267,7 +277,7 @@
                                 @endif
                             </div>
                             <div class="flex items-center">
-                                <!-- Ici vous pourriez ajouter un système de notation -->
+                                
                                 <div class="flex text-yellow-400 mr-2">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -277,17 +287,19 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="mt-4 animated-button bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full flex items-center justify-center">
-                            <i class="fas fa-shopping-cart mr-2"></i>Ajouter au panier
-                        </button>
+                        <form action="{{ route('cart.add', $tenue->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="mt-4 animated-button bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full flex items-center justify-center">
+                                <i class="fas fa-shopping-cart mr-2"></i>Ajouter au panier
+                            </button>
+                        </form>
                     </div>
                 </div>
                 @endforeach
             </div>
         </div>
     </section>
-    
-    <!-- Bannière promo -->
+  
     <section class="py-10 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center justify-between">
@@ -307,7 +319,7 @@
         </div>
     </section>
 
-    <!-- Section Avis des Clients -->
+   
     <section id="avis" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -602,12 +614,7 @@
                         <a href="#" class="text-blue-300 hover:text-white text-sm transition mb-2 md:mb-0">Mentions légales</a>
                     </div>
                 </div>
-                {{-- <div class="flex space-x-2 mt-4 md:mt-0">
-                    <img src="/api/placeholder/40/25" alt="Visa" class="h-8">
-                    <img src="/api/placeholder/40/25" alt="Mastercard" class="h-8">
-                    <img src="/api/placeholder/40/25" alt="PayPal" class="h-8">
-                    <img src="/api/placeholder/40/25" alt="Apple Pay" class="h-8">
-                </div> --}}
+                
             </div>
         </div>
     </div>

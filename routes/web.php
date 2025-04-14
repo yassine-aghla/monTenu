@@ -13,7 +13,9 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\WishlistController;
-
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PaymentController;
 
 
 
@@ -80,3 +82,17 @@ Route::put('hero-sections/{hero_section}/activate', [HeroSectionController::clas
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::post('/wishlist/{tenue}', [WishlistController::class, 'store'])->name('wishlist.store');
 Route::delete('/wishlist/{tenue}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{tenue}', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/remove/{cart}', [CartController::class, 'remove'])->name('cart.remove');
+
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
+    
+
+
