@@ -106,6 +106,16 @@
                             @endauth
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('cart.index') }}" class="nav-link font-medium flex items-center">
+                            <i class="fas fa-shopping-cart mr-1"></i> Panier
+                            @auth
+                                <span class="ml-1 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                                    {{ auth()->user()->carts->count() }}
+                                </span>
+                            @endauth
+                        </a>
+                    </li>
                     <li><a href="" class="nav-link font-medium">À propos</a></li>
                     <li><a href="" class="nav-link font-medium">Contact</a></li>
                 </ul>
@@ -151,9 +161,12 @@
                     <h3 class="font-bold text-lg">{{ $tenue->nom }}</h3>
                     <p class="text-gray-600">{{ $tenue->brand->nom }}</p>
                     <p class="text-blue-800 font-bold mt-2">€{{ number_format($tenue->prix, 2) }}</p>
-                    <button class="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-                        Ajouter au panier
-                    </button>
+                    <form action="{{ route('cart.add', $tenue->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="mt-4 animated-button bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full flex items-center justify-center">
+                            <i class="fas fa-shopping-cart mr-2"></i>Ajouter au panier
+                        </button>
+                    </form>
                 </div>
             </div>
             @endforeach
