@@ -14,7 +14,7 @@
         </div>
 
         
-        <form action="{{ route('brands.update', $brand->id) }}" method="POST" class="space-y-6">
+        <form action="{{ route('brands.update', $brand->id) }}" method="POST" class="space-y-6" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
