@@ -121,9 +121,26 @@
                 </ul>
             </nav>
             <div class="flex items-center space-x-4">
-                <a href="{{ route('login') }}" class="bg-white text-blue-800 px-4 py-2 rounded-full font-medium hover:bg-blue-100 transition">
-                    <i class="fas fa-user mr-2"></i>Connexion
-                </a>
+                @guest
+                  
+                    <a href="{{ route('login') }}" class="bg-white text-blue-800 px-4 py-2 rounded-full font-medium hover:bg-blue-100 transition">
+                        <i class="fas fa-user mr-2"></i>Connexion
+                    </a>
+                @else
+                   
+                    <div class="relative group">
+       
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="bg-white text-blue-800 px-4 py-2 rounded-full font-medium hover:bg-blue-100 transition">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
+                                </button>
+                            </form>
+                   
+                    </div>
+                @endguest
+            
+               
                 <button class="md:hidden text-white focus:outline-none">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
