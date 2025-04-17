@@ -173,7 +173,7 @@
                     @foreach($order->items as $item)
                     <div class="p-6 flex flex-col md:flex-row">
                         <div class="w-full md:w-1/4 mb-4 md:mb-0">
-                            <img src="{{ asset($item->tenue->image) }}" alt="{{ $item->tenue->nom }}" class="w-full rounded-lg">
+                            <img src="{{ $item->tenue->images->first() ? asset('storage/'.$item->tenue->images->first()->image_path) : asset('images/placeholder.jpg') }}" class="w-full rounded-lg"> 
                         </div>
                         <div class="w-full md:w-3/4 md:pl-6">
                             <h3 class="text-lg font-medium text-gray-800">{{ $item->tenue->nom }}</h3>
