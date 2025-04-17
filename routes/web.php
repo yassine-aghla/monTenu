@@ -16,6 +16,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderController;
 
 
 
@@ -94,5 +95,7 @@ Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.s
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
     
+Route::get('/my-orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/my-orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
 

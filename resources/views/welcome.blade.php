@@ -116,6 +116,7 @@
                             @endauth
                         </a>
                     </li>
+                    <li><a href="{{ route('orders.index') }}" class="nav-link font-medium">Mes Commandes</a></li>
                     <li><a href="" class="nav-link font-medium">À propos</a></li>
                     <li><a href="" class="nav-link font-medium">Contact</a></li>
                 </ul>

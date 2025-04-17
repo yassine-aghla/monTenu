@@ -18,6 +18,8 @@ class Order extends Model
         'billing_address'
     ];
 
+  
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -35,4 +37,21 @@ class Order extends Model
         'failed' => 'Échouée',
         'refunded' => 'Remboursée'
     ];
+
+    public function getStatusLabelAttribute()
+    {
+        return self::$statuses[$this->status] ?? 'Inconnu';
+    }
+
+    public function getStatusColorClassAttribute()
+    {
+        $colors = [
+            'pending' => 'bg-yellow-100 text-yellow-800',
+            'completed' => 'bg-green-100 text-green-800',
+            'failed' => 'bg-red-100 text-red-800',
+            'refunded' => 'bg-blue-100 text-blue-800'
+        ];
+        
+        return $colors[$this->status] ?? 'bg-gray-100 text-gray-800';
+    }
 }
