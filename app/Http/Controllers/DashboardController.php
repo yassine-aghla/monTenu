@@ -16,6 +16,17 @@ class DashboardController extends Controller
         $pendingOrders = Order::where('status', 'pending')->count();
 
         
-        
+        $recentOrders = Order::with(['user', 'items.tenue'])
+                            ->latest()
+                            ->take(5)
+                            ->get();
+
+        return view('dashboard', compact(
+            'totalRevenue',
+            'newCustomers',
+            'totalOrders',
+            'pendingOrders',
+            'recentOrders'
+        ));
     }
 }
