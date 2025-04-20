@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Models\Tenue;
+use App\Models\Category;
+use App\Models\Brand;
 
 class DashboardController extends Controller
 {
@@ -14,6 +17,12 @@ class DashboardController extends Controller
         $newCustomers = User::where('created_at', '>=', now()->subDays(30))->count();
         $totalOrders = Order::count();
         $pendingOrders = Order::where('status', 'pending')->count();
+        $stats = [
+         
+            'total_tenues' => Tenue::count(),
+            'total_categories' => Category::count(),
+            'total_brands' => Brand::count()
+        ];
 
         
         $recentOrders = Order::with(['user', 'items.tenue'])
@@ -26,7 +35,8 @@ class DashboardController extends Controller
             'newCustomers',
             'totalOrders',
             'pendingOrders',
-            'recentOrders'
+            'recentOrders',
+            'stats'
         ));
     }
 }
