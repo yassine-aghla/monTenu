@@ -149,36 +149,7 @@
         </div>
     </header>
 
-    <!-- Hero Section Améliorée -->
-    {{-- <section class="hero-gradient relative py-20">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
-            <div class="md:w-1/2 text-white z-10 mb-10 md:mb-0">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Célébrez votre passion pour le football</h2>
-                <p class="text-xl mb-8 opacity-90">Découvrez notre collection exclusive de maillots authentiques pour tous les fans de football.</p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#nouveautes" class="animated-button bg-white text-blue-800 px-8 py-3 rounded-full font-bold text-center hover:bg-blue-50 shadow-lg">
-                        Voir les nouveautés
-                    </a>
-                    <a href="#categories" class="animated-button bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-bold text-center hover:bg-white hover:bg-opacity-10 shadow-lg">
-                        Nos catégories
-                    </a>
-                </div>
-            </div>
-            <div class="md:w-1/2 relative">
-                <div class="w-full h-80 md:h-96 rounded-lg overflow-hidden shadow-2xl relative">
-                    <img src= "{{asset('images/tenus.jpg') }}" alt="Collection de maillots de football" class="w-full h-full object-contain">
-                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900 to-transparent opacity-30"></div>
-                </div>
-                <div class="absolute -bottom-5 -left-5 bg-yellow-500 text-blue-900 py-2 px-4 rounded-full font-bold shadow-lg">
-                    Jusqu'à -30% sur les maillots
-                </div>
-            </div>
-        </div>
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute -bottom-10 right-10 w-40 h-40 bg-blue-600 rounded-full opacity-20"></div>
-            <div class="absolute top-20 left-10 w-20 h-20 bg-white rounded-full opacity-10"></div>
-        </div>
-    </section> --}}
+  
 
     @php
     $hero = App\Models\HeroSection::active();
