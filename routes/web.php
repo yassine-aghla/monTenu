@@ -17,6 +17,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -57,11 +58,11 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout.submit');
 // Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 // Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
 // Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
 
 
 Route::middleware(['auth', 'check.permission:Gérer les produits'])->group(function () {
@@ -97,5 +98,6 @@ Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('che
     
 Route::get('/my-orders', [OrderController::class, 'index'])->name('orders.index');
 Route::get('/my-orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
