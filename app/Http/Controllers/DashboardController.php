@@ -12,6 +12,10 @@ class DashboardController extends Controller
      
         $totalRevenue = Order::where('status', 'completed')->sum('total');
         $newCustomers = User::where('created_at', '>=', now()->subDays(30))->count();
+        $totalOrders = Order::count();
+        $pendingOrders = Order::where('status', 'pending')->count();
+
+        
         
     }
 }
