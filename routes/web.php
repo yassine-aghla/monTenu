@@ -100,3 +100,4 @@ Route::get('/my-orders', [OrderController::class, 'index'])->name('orders.index'
 Route::get('/my-orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+
