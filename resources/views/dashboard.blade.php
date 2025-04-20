@@ -27,7 +27,7 @@
 
     <!-- Cartes de Statistiques -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <!-- Revenu Total -->
+       
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="p-6">
                 <div class="flex items-center">
@@ -44,7 +44,7 @@
             </div>
         </div>
         
-        <!-- Nouveaux Clients -->
+       
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="p-6">
                 <div class="flex items-center">
@@ -61,7 +61,7 @@
             </div>
         </div>
         
-        <!-- Commandes en Attente -->
+     
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="p-6">
                 <div class="flex items-center">
@@ -79,7 +79,7 @@
         </div>
     </div>
 
-    <!-- Tableau des dernières transactions -->
+    
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <div class="p-6">
             <div class="flex justify-between items-center mb-4">
