@@ -221,7 +221,7 @@
                     <span class="text-blue-600 font-semibold uppercase tracking-wider">Découvrez</span>
                     <h2 class="text-3xl font-bold text-gray-900">Nouveautés & Meilleures Ventes</h2>
                 </div>
-                <a href="" class="text-blue-600 font-medium hover:text-blue-800 flex items-center">
+                <a href="{{ route('shop.index') }}" class="text-blue-600 font-medium hover:text-blue-800 flex items-center">
                     Voir tout le catalogue
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>

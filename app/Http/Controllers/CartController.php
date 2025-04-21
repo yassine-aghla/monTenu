@@ -10,6 +10,9 @@ class CartController extends Controller
 {
     public function index()
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
         $cartItems = Auth::user()->carts()->with('tenue')->get();
         $total = $cartItems->sum(function ($item) {
             return $item->tenue->prix * $item->quantity;
@@ -20,6 +23,10 @@ class CartController extends Controller
 
     public function add(Tenue $tenue, Request $request)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+        
         $cartItem = Cart::where('user_id', auth()->id())
                         ->where('tenue_id', $tenue->id)
                         ->first();

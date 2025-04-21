@@ -23,7 +23,7 @@
                             <a href="{{ route('clients.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Clients</a>
                         </li>
                         <li><a href="{{ route('categories.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Categories</a></li>
-                        <li><a href="{{ route('commandes.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Commandes</a></li>
+                        <li><a href="{{ route('commandes.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Commandes</a></li>
                       
                         <li>
                             <a href="{{ route('roles.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Roles</a>

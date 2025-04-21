@@ -11,6 +11,9 @@ class WishlistController extends Controller
 {
     public function index()
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
         $wishlistItems = Auth::user()->wishlistTenues()
                                ->with('brand', 'images')
                                ->get();
