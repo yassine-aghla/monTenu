@@ -225,7 +225,74 @@
             </form>
         </div>
 
-       
+        <!-- Liste des produits -->
+        <div class="md:w-3/4">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold">Boutique</h1>
+                <div>
+                    {{ $tenues->total() }} produits trouvés
+                </div>
+            </div>
+        
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach($tenues as $tenue)
+                <div class="bg-white rounded-lg shadow overflow-hidden relative">
+                    
+                    @auth
+                        @if(auth()->user()->wishlistTenues->contains($tenue->id))
+                            <button onclick="toggleWishlist({{ $tenue->id }}, false)" 
+                                    class="absolute top-2 right-2 z-10 text-red-500 hover:text-red-700 wishlist-btn-{{ $tenue->id }}"
+                                    title="Retirer de la wishlist">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        @else
+                            <button onclick="toggleWishlist({{ $tenue->id }}, true)" 
+                                    class="absolute top-2 right-2 z-10 text-gray-400 hover:text-red-500 wishlist-btn-{{ $tenue->id }}"
+                                    title="Ajouter à la wishlist">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        @endif
+                    @endauth
+                    
+                  
+                    <div class="relative h-48 overflow-hidden">
+                        @php
+                            $images = $tenue->images;
+                         
+                        @endphp
+        
+                        @foreach($images as $index => $image)
+                            <img src="{{ asset('storage/'.$image->image_path) }}" 
+                                 alt="{{ $tenue->nom }} - Image {{ $index + 1 }}" 
+                                 class="w-full h-48 object-cover absolute transition-opacity duration-300 {{ $index === 0 ? 'opacity-100' : 'opacity-0' }}"
+                                 data-index="{{ $index }}">
+                        @endforeach
+        
+                        @if($images->count() > 1)
+                            <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full hover:bg-opacity-75 transition prev-btn"
+                                    onclick="changeImage(this, -1)">
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </button>
+                            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full hover:bg-opacity-75 transition next-btn"
+                                    onclick="changeImage(this, 1)">
+                                <i class="fas fa-chevron-right text-xs"></i>
+                            </button>
+                        @endif
+                    </div>
+        
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">{{ $tenue->nom }}</h3>
+                        <p class="text-gray-600">{{ $tenue->brand->nom }}</p>
+                        <p class="text-blue-800 font-bold mt-2">€{{ number_format($tenue->prix, 2) }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        
+            <div class="mt-8">
+                {{ $tenues->appends(request()->query())->links() }}
+            </div>
+        </div>
         
        
         
@@ -240,7 +307,28 @@
         });
     });
 });
-
+function changeImage(button, direction) {
+                const carousel = button.closest('.relative');
+                const images = carousel.querySelectorAll('img');
+                const currentIndex = Array.from(images).findIndex(img => img.classList.contains('opacity-100'));
+                
+                let newIndex = currentIndex + direction;
+                
+              
+                if (newIndex < 0) {
+                    newIndex = images.length - 1;
+                } else if (newIndex >= images.length) {
+                    newIndex = 0;
+                }
+                
+                
+                images[currentIndex].classList.remove('opacity-100');
+                images[currentIndex].classList.add('opacity-0');
+                
+                
+                images[newIndex].classList.remove('opacity-0');
+                images[newIndex].classList.add('opacity-100');
+            }
         
 function toggleWishlist(tenueId, addToWishlist) {
     const url = addToWishlist 
