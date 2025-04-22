@@ -28,5 +28,10 @@ class ClientController extends Controller
     }
 
 
-    
+    public function destroy(User $user)
+    {
+        
+        $user->delete();
+        return back()->with('success', 'Client supprimé avec succès');
+    }
 }
