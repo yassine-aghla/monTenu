@@ -94,6 +94,25 @@
     font-size: 1.2rem;
     outline: none;
 }
+    .prev-btn, .next-btn {
+        z-index: 5;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .prev-btn {
+        left: 8px;
+    }
+    
+    .next-btn {
+        right: 8px;
+    }
+    
+
+
     </style>
 </head>
 <body class="bg-gray-50">
@@ -206,57 +225,13 @@
             </form>
         </div>
 
-        <!-- Liste des produits -->
-        <div class="md:w-3/4">
-            <div class="flex justify-between items-center mb-6">
-                <h1 class="text-2xl font-bold">Boutique</h1>
-                <div>
-                    {{ $tenues->total() }} produits trouvés
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($tenues as $tenue)
-                <div class="bg-white rounded-lg shadow overflow-hidden relative">
-                   
-                    @auth
-                    @if(auth()->user()->wishlistTenues->contains($tenue->id))
-                        <button onclick="toggleWishlist({{ $tenue->id }}, false)" 
-                                class="text-red-500 hover:text-red-700 wishlist-btn-{{ $tenue->id }}"
-                                title="Retirer de la wishlist">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    @else
-                        <button onclick="toggleWishlist({{ $tenue->id }}, true)" 
-                                class="text-gray-400 hover:text-red-500 wishlist-btn-{{ $tenue->id }}"
-                                title="Ajouter à la wishlist">
-                            <i class="far fa-heart"></i>
-                        </button>
-                    @endif
-                @endauth
-
-                    
-                    
-                        <img src="{{ $tenue->images->first() ? asset('storage/'.$tenue->images->first()->image_path) : asset('images/placeholder.jpg') }}" 
-                             alt="{{ $tenue->nom }}" 
-                             class="w-full h-48 object-cover">
-                   
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg">{{ $tenue->nom }}</h3>
-                        <p class="text-gray-600">{{ $tenue->brand->nom }}</p>
-                        <p class="text-blue-800 font-bold mt-2">€{{ number_format($tenue->prix, 2) }}</p>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            <div class="mt-8">
-                {{ $tenues->appends(request()->query())->links() }}
-            </div>
-        </div>
-    </div>
-</div>
-
+       
+        
+       
+        
+      
 <script>
+
     document.addEventListener('DOMContentLoaded', function() {
     const filterForm = document.querySelector('form[method="GET"]');
     document.querySelectorAll('input[name], select[name]').forEach(element => {
@@ -265,6 +240,8 @@
         });
     });
 });
+
+        
 function toggleWishlist(tenueId, addToWishlist) {
     const url = addToWishlist 
         ? `/wishlist/${tenueId}`

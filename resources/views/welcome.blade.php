@@ -82,6 +82,22 @@
         .nav-link:hover:after {
             width: 100%;
         }
+        .prev-btn, .next-btn {
+        z-index: 5;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .prev-btn {
+        left: 8px;
+    }
+    
+    .next-btn {
+        right: 8px;
+    }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -231,15 +247,35 @@
                 @foreach($featuredTenues as $tenue)
                 <div class="product-card bg-white rounded-xl overflow-hidden shadow-md">
                     <div class="relative">
-              @if($tenue->images->first())
-                            <img src="{{ asset('storage/'.$tenue->images->first()->image_path) }}" 
-                                 alt="{{ $tenue->nom }}" 
-                                 class="w-full h-64 object-cover">
-                        @else
-                            <img src="{{ asset('images/placeholder.jpg') }}" 
-                                 alt="Placeholder" 
-                                 class="w-full h-64 object-cover">
-                        @endif
+                       
+                        <div class="relative h-64 overflow-hidden">
+                            @php
+                                $images = $tenue->images;
+                               
+                            
+                            @endphp
+            
+                            
+                            @foreach($images as $index => $image)
+                                <img src="{{ asset('storage/'.$image->image_path) }}" 
+                                     alt="{{ $tenue->nom }} - Image {{ $index + 1 }}" 
+                                     class="w-full h-64 object-cover absolute transition-opacity duration-300 {{ $index === 0 ? 'opacity-100' : 'opacity-0' }}"
+                                     data-index="{{ $index }}">
+                            @endforeach
+            
+                           
+                            @if($images->count() > 1)
+                                <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition prev-btn"
+                                        onclick="changeImage(this, -1)">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition next-btn"
+                                        onclick="changeImage(this, 1)">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            @endif
+                        </div>
+            
                         
                         @if($tenue->promotion > 0)
                             <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -251,9 +287,12 @@
                             </span>
                         @endif
                     </div>
+                    
+                   
                     <div class="p-6">
                         <span class="text-sm text-blue-600 font-medium">{{ $tenue->brand->nom ?? 'Marque inconnue' }}</span>
                         <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $tenue->nom }}</h3>
+                        
                         <div class="flex justify-between items-center">
                             <div>
                                 @if($tenue->promotion > 0)
@@ -266,7 +305,6 @@
                                 @endif
                             </div>
                             <div class="flex items-center">
-                                
                                 <div class="flex text-yellow-400 mr-2">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -276,16 +314,11 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="{{ route('cart.add', $tenue->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="mt-4 animated-button bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full flex items-center justify-center">
-                                <i class="fas fa-shopping-cart mr-2"></i>Ajouter au panier
-                            </button>
-                        </form>
                     </div>
                 </div>
                 @endforeach
             </div>
+           
         </div>
     </section>
   
@@ -688,4 +721,27 @@
         });
     });
 });
+
+function changeImage(button, direction) {
+                    const carousel = button.closest('.relative');
+                    const images = carousel.querySelectorAll('img');
+                    const currentIndex = Array.from(images).findIndex(img => img.classList.contains('opacity-100'));
+                    
+                    let newIndex = currentIndex + direction;
+                    
+                   
+                    if (newIndex < 0) {
+                        newIndex = images.length - 1;
+                    } else if (newIndex >= images.length) {
+                        newIndex = 0;
+                    }
+                    
+                    
+                    images[currentIndex].classList.remove('opacity-100');
+                    images[currentIndex].classList.add('opacity-0');
+                    
+                   
+                    images[newIndex].classList.remove('opacity-0');
+                    images[newIndex].classList.add('opacity-100');
+                }
 </script>

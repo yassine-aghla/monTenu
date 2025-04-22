@@ -225,7 +225,7 @@
                 </div>
             </div>
             
-            <!-- Colonne 2 - Liens rapides -->
+           
             <div>
                 <h3 class="text-lg font-bold mb-4">Liens rapides</h3>
                 <ul class="space-y-2">
@@ -238,7 +238,7 @@
                 </ul>
             </div>
             
-            <!-- Colonne 3 - Service client -->
+            
             <div>
                 <h3 class="text-lg font-bold mb-4">Service client</h3>
                 <ul class="space-y-2">
@@ -251,7 +251,7 @@
                 </ul>
             </div>
             
-            <!-- Colonne 4 - Contact -->
+           
             <div>
                 <h3 class="text-lg font-bold mb-4">Contactez-nous</h3>
                 <ul class="space-y-3">
