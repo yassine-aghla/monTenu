@@ -74,7 +74,9 @@ Route::get('/tenues/create', [TenueController::class, 'create'])->name('tenues.c
 // Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
 
 Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
-
+Route::post('/clients/{user}/ban', [ClientController::class, 'ban'])->name('clients.ban');
+Route::post('/clients/{user}/Active', [ClientController::class, 'Active'])->name('clients.Active');
+Route::delete('/clients/{user}', [ClientController::class, 'destroy'])->name('clients.destroy');
 
 Route::resource('categories', CategorieController::class);
 // Route::get('/commandes/create', [OrderController::class, 'index'])->name('commandes.index');
