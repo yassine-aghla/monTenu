@@ -71,7 +71,11 @@ Route::middleware(['auth', 'check.permission:Gérer les produits'])->group(funct
 });
 
 Route::get('/tenues/create', [TenueController::class, 'create'])->name('tenues.create');
-Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
+// Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
+
+Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+
+
 Route::resource('categories', CategorieController::class);
 // Route::get('/commandes/create', [OrderController::class, 'index'])->name('commandes.index');
 Route::get('/orders', [OrderController::class, 'display'])->name('commandes.index');

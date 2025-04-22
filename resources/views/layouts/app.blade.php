@@ -20,7 +20,7 @@
                         <li><a href="{{ route('dashboard') }}" class="block p-2 bg-gray-200 rounded">Dashboard</a></li>
                         <li><a href="{{ route('tenues.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Tenues</a></li>
                         <li>
-                            <a href="{{ route('clients.create') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Clients</a>
+                            <a href="{{ route('clients.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Clients</a>
                         </li>
                         <li><a href="{{ route('categories.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Categories</a></li>
                         <li><a href="{{ route('commandes.index') }}" class="block p-2 hover:bg-gray-100 rounded">Manage Commandes</a></li>

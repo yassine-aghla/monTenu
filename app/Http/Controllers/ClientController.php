@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function create()
+    public function index()
     {
-        return view('clients.create'); 
+        $clients = User::withCount('orders')->get();
+        return view('clients.index', compact('clients'));
     }
+
+
 }
