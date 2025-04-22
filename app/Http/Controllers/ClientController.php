@@ -13,5 +13,20 @@ class ClientController extends Controller
         return view('clients.index', compact('clients'));
     }
 
+    public function ban(User $user)
+    {
+        
+       $user->update(['is_banned' => true]);
+        return back()->with('success', 'Client banni avec succès');
+    }
+     
+    public function Active(User $user)
+    {
+        
+        $user->update(['is_banned' => false]);
+        return back()->with('success', 'Client Active avec succès');
+    }
 
+
+    
 }
