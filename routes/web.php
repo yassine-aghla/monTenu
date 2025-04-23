@@ -33,6 +33,10 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
