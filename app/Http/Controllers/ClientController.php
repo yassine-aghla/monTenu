@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -34,4 +35,20 @@ class ClientController extends Controller
         $user->delete();
         return back()->with('success', 'Client supprimé avec succès');
     }
+
+   public function assignRole(Request $request, User $user)
+{
+    $request->validate([
+        'role' => 'required|in:admin,client'
+    ]);
+    
+    
+    $user->roles()->detach();
+    
+ 
+    $role = Role::where('name', $request->role)->first();
+    $user->roles()->attach($role);
+    
+    return back()->with('success', 'Rôle attribué avec succès');
+}
 }

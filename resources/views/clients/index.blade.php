@@ -18,6 +18,7 @@
                     <th class="py-2 px-4 border-b">Nom</th>
                     <th class="py-2 px-4 border-b">Email</th>
                     <th class="py-2 px-4 border-b">Commandes</th>
+                    
                     <th class="py-2 px-4 border-b">Actions</th>
                 </tr>
             </thead>
@@ -28,6 +29,7 @@
                     <td class="py-2 px-4 border-b">{{ $client->name }}</td>
                     <td class="py-2 px-4 border-b">{{ $client->email }}</td>
                     <td class="py-2 px-4 border-b">{{ $client->orders_count }} Commandes</td>
+                 
                      <td class="py-2 px-4 border-b space-x-2">
                                             @if($client->is_banned)
                                             <form action="{{ route('clients.Active', $client) }}" method="POST" class="inline">

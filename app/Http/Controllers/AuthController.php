@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
 use App\Services\PasswordService;
+use App\Models\Role;
 
 class AuthController extends Controller
 {
@@ -29,6 +30,7 @@ class AuthController extends Controller
         ]);
 
         $user = $this->authService->register($request->all());
+        // $user->roles()->attach(Role::where('name', 'client')->first());
 
         auth()->login($user);
 
@@ -55,9 +57,16 @@ class AuthController extends Controller
             ]);
         }
 
+        if ($user->is_banned) {
+            auth()->logout();
+            return back()->withErrors([
+                'email' => 'Votre compte a été désactivé. Contactez l\'administrateur.',
+            ]);
+        }
+
         auth()->login($user);
 
-        return redirect('/dashboard');
+        return redirect($this->redirectTo());
     }
 
     public function logout(Request $request)
@@ -105,4 +114,6 @@ class AuthController extends Controller
 
         return back()->withErrors(['email' => 'Impossible de réinitialiser le mot de passe.']);
     }
+
+
 }
