@@ -116,21 +116,38 @@
                             @endauth
                         </a>
                     </li>
-                    <li><a href="" class="nav-link font-medium">À propos</a></li>
-                    <li><a href="" class="nav-link font-medium">Contact</a></li>
+                    <li><a href="{{ route('orders.index') }}" class="nav-link font-medium">Mes Commandes</a></li>
+                    <li><a href="{{ route('about') }}" class="nav-link font-medium">À propos</a></li>
+                    <li><a href="{{ route('contact') }}" class="nav-link font-medium">Contact</a></li>
                 </ul>
             </nav>
             <div class="flex items-center space-x-4">
-                <a href="{{ route('login') }}" class="bg-white text-blue-800 px-4 py-2 rounded-full font-medium hover:bg-blue-100 transition">
-                    <i class="fas fa-user mr-2"></i>Connexion
-                </a>
+                @guest
+                  
+                    <a href="{{ route('login') }}" class="bg-white text-blue-800 px-4 py-2 rounded-full font-medium hover:bg-blue-100 transition">
+                        <i class="fas fa-user mr-2"></i>Connexion
+                    </a>
+                @else
+                   
+                    <div class="relative group">
+       
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="bg-white text-blue-800 px-4 py-2 rounded-full font-medium hover:bg-blue-100 transition">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                                </button>
+                            </form>
+                   
+                    </div>
+                @endguest
+            
+               
                 <button class="md:hidden text-white focus:outline-none">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
     </header>
-
 <div class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold mb-8">Votre Panier</h1>
     

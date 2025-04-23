@@ -134,7 +134,7 @@
                     </li>
                     <li><a href="{{ route('orders.index') }}" class="nav-link font-medium">Mes Commandes</a></li>
                     <li><a href="{{ route('about') }}" class="nav-link font-medium">À propos</a></li>
-                    <li><a href="" class="nav-link font-medium">Contact</a></li>
+                    <li><a href="{{ route('contact') }}" class="nav-link font-medium">Contact</a></li>
                 </ul>
             </nav>
             <div class="flex items-center space-x-4">
