@@ -115,5 +115,11 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Impossible de réinitialiser le mot de passe.']);
     }
 
-
+    protected function redirectTo()
+{
+    if (auth()->user()->hasRole('Admin')) {
+        return '/dashboard';
+    }
+    return '/';
+}
 }
