@@ -18,7 +18,7 @@
                     <th class="py-2 px-4 border-b">Nom</th>
                     <th class="py-2 px-4 border-b">Email</th>
                     <th class="py-2 px-4 border-b">Commandes</th>
-                    
+                    <th class="py-2 px-4 border-b">assignRole</th>
                     <th class="py-2 px-4 border-b">Actions</th>
                 </tr>
             </thead>
@@ -29,7 +29,17 @@
                     <td class="py-2 px-4 border-b">{{ $client->name }}</td>
                     <td class="py-2 px-4 border-b">{{ $client->email }}</td>
                     <td class="py-2 px-4 border-b">{{ $client->orders_count }} Commandes</td>
-                 
+                    <td>
+                        <form action="{{ route('clients.assignRole', $client) }}" method="POST">
+                            @csrf
+                            <select name="role" 
+                              onchange="this.form.submit(); this.disabled=true;"
+                               class="form-select {{ $client->hasRole('Admin') ? 'bg-yellow-100' : '' }}">
+                                <option value="client" @selected($client->hasRole('Client'))>Client</option>
+                                <option value="admin" @selected($client->hasRole('Admin'))>Admin</option>
+                            </select>
+                        </form>
+                    </td>
                      <td class="py-2 px-4 border-b space-x-2">
                                             @if($client->is_banned)
                                             <form action="{{ route('clients.Active', $client) }}" method="POST" class="inline">
