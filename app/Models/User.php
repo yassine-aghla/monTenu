@@ -82,7 +82,6 @@ public function wishlistTenues()
 }
 
 
-
 public function orders()
 {
     return $this->hasMany(Order::class);
