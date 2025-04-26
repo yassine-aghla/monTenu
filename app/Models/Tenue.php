@@ -34,5 +34,12 @@ class Tenue extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class, 'cart_items')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
     
 }
