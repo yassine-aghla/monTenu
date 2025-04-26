@@ -12,28 +12,29 @@ use Illuminate\Support\Facades\Auth;
 class CheckoutController extends Controller
 {
     public function index()
-    {
-        $cartItems = Auth::user()->carts()->with('tenue')->get();
-        
-        if ($cartItems->isEmpty()) {
-            return redirect()->route('cart.index')->with('error', 'Votre panier est vide');
-        }
-
-        $total = $cartItems->sum(function ($item) {
-            return $item->tenue->prix * $item->quantity;
-        });
-
-        return view('checkout.index', compact('cartItems', 'total'));
+{
+    $cart = Auth::user()->cart;
+    
+    if (!$cart || $cart->items->isEmpty()) {
+        return redirect()->route('cart.index')->with('error', 'Votre panier est vide');
     }
 
-    public function store(Request $request)
-    {
-        Stripe::setApiKey(config('services.stripe.secret'));
+    $cartItems = $cart->items()->with('tenue')->get();
+    $total = $cartItems->sum(function ($item) {
+        return $item->tenue->prix * $item->quantity;
+    });
 
-        $cartItems = Auth::user()->carts()->with('tenue')->get();
-        $total = $cartItems->sum(function ($item) {
-            return $item->tenue->prix * $item->quantity;
-        }) * 100; 
+    return view('checkout.index', compact('cartItems', 'total'));
+}
+public function store(Request $request)
+{
+    Stripe::setApiKey(config('services.stripe.secret'));
+
+    $cart = Auth::user()->cart;
+    $cartItems = $cart->items()->with('tenue')->get();
+    $total = $cartItems->sum(function ($item) {
+        return $item->tenue->prix * $item->quantity;
+    }) * 100;
 
         $lineItems = $cartItems->map(function ($item) {
             return [
@@ -74,6 +75,7 @@ class CheckoutController extends Controller
                 'price' => $item->tenue->prix
             ]);
         }
+        $cart->items()->delete();
 
         return redirect($session->url);
     }
@@ -92,7 +94,7 @@ class CheckoutController extends Controller
             $order->update(['status' => 'completed']);
             
             
-            Auth::user()->carts()->delete();
+            Auth::user()->cart->items()->delete();
         }
 
         return view('checkout.success', compact('order'));

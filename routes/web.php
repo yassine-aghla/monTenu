@@ -104,8 +104,8 @@ Route::delete('/wishlist/{tenue}', [WishlistController::class, 'destroy'])->name
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{tenue}', [CartController::class, 'add'])->name('cart.add');
-Route::post('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/cart/remove/{cart}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/update/{cartItem}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/remove/{cartItem}', [CartController::class, 'remove'])->name('cart.remove');
 
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');

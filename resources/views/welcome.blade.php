@@ -127,7 +127,7 @@
                             <i class="fas fa-shopping-cart mr-1"></i> Panier
                             @auth
                                 <span class="ml-1 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
-                                    {{ auth()->user()->carts->count() }}
+                                  
                                 </span>
                             @endauth
                         </a>

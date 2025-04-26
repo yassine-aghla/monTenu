@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Tenue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,10 @@ class CartController extends Controller
         if (!Auth::check()) {
             return redirect()->route('login');
         }
-        $cartItems = Auth::user()->carts()->with('tenue')->get();
+
+        $cart = Auth::user()->cart ?? Cart::create(['user_id' => Auth::id()]);
+        $cartItems = $cart->items()->with('tenue')->get();
+        
         $total = $cartItems->sum(function ($item) {
             return $item->tenue->prix * $item->quantity;
         });
@@ -27,15 +31,15 @@ class CartController extends Controller
             return redirect()->route('login');
         }
         
-        $cartItem = Cart::where('user_id', auth()->id())
-                        ->where('tenue_id', $tenue->id)
-                        ->first();
+        $cart = Auth::user()->cart ?? Cart::create(['user_id' => Auth::id()]);
+        
+        $cartItem = $cart->items()->where('tenue_id', $tenue->id)->first();
 
         if ($cartItem) {
             $cartItem->increment('quantity');
         } else {
-            Cart::create([
-                'user_id' => auth()->id(),
+            CartItem::create([
+                'cart_id' => $cart->id,
                 'tenue_id' => $tenue->id,
                 'quantity' => 1
             ]);
@@ -44,20 +48,22 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Produit ajouté au panier');
     }
 
-    public function update(Cart $cart, Request $request)
+    public function update(CartItem $cartItem, Request $request)
     {
         $request->validate([
             'quantity' => 'required|numeric|min:1'
         ]);
-
-        $cart->update(['quantity' => $request->quantity]);
-
+    
+        $cartItem->update(['quantity' => $request->quantity]);
+    
         return redirect()->back()->with('success', 'Panier mis à jour');
     }
 
-    public function remove(Cart $cart)
+    
+
+    public function remove(CartItem $cartItem)
     {
-        $cart->delete();
+        $cartItem->delete();
         return redirect()->back()->with('success', 'Produit retiré du panier');
     }
 }
