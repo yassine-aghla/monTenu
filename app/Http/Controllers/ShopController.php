@@ -27,6 +27,10 @@ class ShopController extends Controller
             $query->where('equipe', 'like', '%'.$request->equipe.'%');
         }
 
+        if ($request->filled('joueur')) {
+            $query->where('joueur', 'like', '%'.$request->joueur.'%');
+        }
+
        
         if ($request->filled('search')) {
             $query->where(function($q) use ($request) {

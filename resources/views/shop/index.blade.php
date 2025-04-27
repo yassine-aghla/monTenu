@@ -236,6 +236,15 @@
                            onchange="document.getElementById('filter-form').submit()">
                 </div>
 
+
+                <div class="mb-6">
+                    <h3 class="font-semibold mb-2">Joueur</h3>
+                    <input type="text" name="joueur" placeholder="Filtrer par Joueur..."
+                           class="w-full px-4 py-2 border rounded-lg"
+                           value="{{ request('joueur') }}"
+                           onchange="document.getElementById('filter-form').submit()">
+                </div>
+
                
                 <a href="{{ route('shop.index') }}" class="text-blue-600 hover:text-blue-800 text-sm">
                     Réinitialiser les filtres
