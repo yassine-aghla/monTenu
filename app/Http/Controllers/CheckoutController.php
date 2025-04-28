@@ -26,15 +26,21 @@
  
      return view('checkout.index', compact('cartItems', 'total'));
  }
- public function store(Request $request)
- {
-     Stripe::setApiKey(config('services.stripe.secret'));
+    public function store(Request $request)
+    {
+     try {
+         Stripe::setApiKey(config('services.stripe.secret'));
  
-     $cart = Auth::user()->cart;
-     $cartItems = $cart->items()->with('tenue')->get();
-     $total = $cartItems->sum(function ($item) {
-         return $item->tenue->prix * $item->quantity;
-     }) * 100;
+         $cart = Auth::user()->cart;
+         $cartItems = $cart->items()->with('tenue')->get();
+ 
+         if ($cartItems->isEmpty()) {
+             return back()->with('error', 'Votre panier est vide.');
+         }
+ 
+         $total = $cartItems->sum(function ($item) {
+             return $item->tenue->prix * $item->quantity;
+         }) * 100; 
  
          $lineItems = $cartItems->map(function ($item) {
              return [
@@ -57,10 +63,9 @@
              'cancel_url' => route('checkout.cancel'),
          ]);
  
-       
          $order = Order::create([
              'user_id' => Auth::id(),
-             'total' => $total / 100,
+             'total' => $total / 100, 
              'status' => 'pending',
              'payment_id' => $session->id,
              'shipping_address' => $request->shipping_address,
@@ -75,30 +80,47 @@
                  'price' => $item->tenue->prix
              ]);
          }
+ 
          $cart->items()->delete();
  
          return redirect($session->url);
+ 
+     } catch (\Stripe\Exception\ApiErrorException $e) {
+         
+         return back()->with('error', 'Erreur Stripe : ' . $e->getMessage());
+     } catch (\Exception $e) {
+         
+         return back()->with('error', 'Erreur lors du traitement de la commande : ' . $e->getMessage());
      }
+ }
  
      public function success(Request $request)
-     {
-         $sessionId = $request->get('session_id');
-         
-        
-         Stripe::setApiKey(config('services.stripe.secret'));
-         $session = Session::retrieve($sessionId);
- 
-       
-         $order = Order::where('payment_id', $session->id)->first();
-         if ($order && $order->status === 'pending') {
-             $order->update(['status' => 'completed']);
-             
-             
-             Auth::user()->cart->items()->delete();
-         }
- 
-         return view('checkout.success', compact('order'));
-     }
+{
+    $sessionId = $request->get('session_id');
+
+    try {
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        $session = Session::retrieve($sessionId);
+
+        $order = Order::where('payment_id', $session->id)->first();
+
+        if ($order && $order->status === 'pending') {
+            $order->update(['status' => 'completed']);
+
+            Auth::user()->cart->items()->delete();
+        }
+
+        return view('checkout.success', compact('order'));
+
+    } catch (\Exception $e) {
+      
+        \Log::error('Erreur lors du traitement du paiement Stripe : ' . $e->getMessage());
+
+        return redirect()->route('checkout.cancel')->with('error', 'Une erreur est survenue lors de la validation de votre paiement.');
+    }
+}
+
  
      public function cancel()
      {
