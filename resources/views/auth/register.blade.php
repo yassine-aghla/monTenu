@@ -43,6 +43,9 @@
                         <input type="text" id="name" name="name" required
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Votre nom">
+                            @error('name')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 
@@ -58,6 +61,10 @@
                         <input type="email" id="email" name="email" required
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="votre@email.com">
+                            @error('email')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+
                     </div>
                 </div>
                 
@@ -73,6 +80,9 @@
                         <input type="password" id="password" name="password" required
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="••••••••">
+                            @error('password')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <p class="mt-1 text-xs text-gray-500">
                         Minimum 8 caractères, incluant lettres et chiffres
@@ -91,6 +101,9 @@
                         <input type="password" id="password_confirmation" name="password_confirmation" required
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="••••••••">
+                            @error('password_confirmation')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 
@@ -121,6 +134,9 @@
                     </button>
                 </div>
             </form>
+
+
+         
             
          
             <div class="mt-8 relative">
