@@ -54,14 +54,14 @@ class AuthController extends Controller
 
         if (!$user) {
             return back()->withErrors([
-                'email' => 'Les informations d\'identification fournies ne correspondent pas à nos enregistrements.',
+                'error' => 'Les informations d\'identification fournies ne correspondent pas à nos enregistrements.',
             ]);
         }
 
         if ($user->is_banned) {
             auth()->logout();
             return back()->withErrors([
-                'email' => 'Votre compte a été désactivé. Contactez l\'administrateur.',
+                'error' => 'Votre compte a été désactivé. Contactez l\'administrateur.',
             ]);
         }
 

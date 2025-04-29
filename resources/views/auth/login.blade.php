@@ -43,6 +43,10 @@
                         <input type="email" id="email" name="email" required
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="votre@email.com">
+                            @error('email')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                        
                     </div>
                 </div>
                 
@@ -58,6 +62,9 @@
                         <input type="password" id="password" name="password" required
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="••••••••">
+                            @error('password')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 
@@ -91,6 +98,11 @@
                     </button>
                 </div>
             </form>
+
+            <input type="hidden" id="email" name="email">
+                        @error('error')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
             
             
             <div class="mt-8 relative">
