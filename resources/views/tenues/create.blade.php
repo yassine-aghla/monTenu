@@ -41,9 +41,9 @@
                         <option value="{{ $brand->id }}">{{ $brand->nom }}</option>
                         @endforeach
                     </select>
-                    {{-- @error('categorie_id')
+                    @error('brand_id')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror --}}
+                    @enderror
                 </div>
         </div>
 

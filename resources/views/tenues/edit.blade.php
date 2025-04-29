@@ -42,9 +42,9 @@
                     <option value="{{ $brand->id }}" {{ old('brand_id', $tenue->brand_id) == $brand->id ? 'selected' : '' }}>{{ $brand->nom }}</option>
                     @endforeach
                 </select>
-                {{-- @error('categorie_id')
+                @error('brand_id')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror --}}
+                @enderror
             </div>
         </div>
 
