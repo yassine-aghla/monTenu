@@ -112,6 +112,7 @@
                 <ul class="flex space-x-6">
                     <li><a href="{{ route('home') }}" class="nav-link font-medium">Accueil</a></li>
                     <li><a href="{{ route('shop.index') }}" class="nav-link font-medium">Boutique</a></li>
+                    @auth
                     <li>
                         <a href="{{ route('wishlist.index') }}" class="nav-link font-medium flex items-center">
                             <i class="far fa-heart mr-1"></i> Wishlist
@@ -133,6 +134,7 @@
                         </a>
                     </li>
                     <li><a href="{{ route('orders.index') }}" class="nav-link font-medium">Mes Commandes</a></li>
+                    @endauth
                     <li><a href="{{ route('about') }}" class="nav-link font-medium">À propos</a></li>
                     <li><a href="{{ route('contact') }}" class="nav-link font-medium">Contact</a></li>
                 </ul>

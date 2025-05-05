@@ -112,6 +112,7 @@
                 <ul class="flex space-x-6">
                     <li><a href="{{ route('home') }}" class="nav-link font-medium">Accueil</a></li>
                     <li><a href="{{ route('shop.index') }}" class="nav-link font-medium">Boutique</a></li>
+                    @auth
                     <li>
                         <a href="{{ route('wishlist.index') }}" class="nav-link font-medium flex items-center">
                             <i class="far fa-heart mr-1"></i> Wishlist
@@ -133,6 +134,7 @@
                         </a>
                     </li>
                     <li><a href="{{ route('orders.index') }}" class="nav-link font-medium">Mes Commandes</a></li>
+                    @endauth
                     <li><a href="{{ route('about') }}" class="nav-link font-medium">À propos</a></li>
                     <li><a href="{{ route('contact') }}" class="nav-link font-medium">Contact</a></li>
                 </ul>
@@ -328,26 +330,6 @@
         </div>
     </section>
   
-    <section class="py-10 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="mb-6 md:mb-0">
-                    <h3 class="text-2xl font-bold mb-2">Inscrivez-vous à notre newsletter</h3>
-                    <p class="text-blue-100">Recevez 10% de réduction sur votre première commande et nos dernières offres</p>
-                </div>
-                <div class="w-full md:w-auto">
-                    <div class="flex flex-col sm:flex-row">
-                        <input type="email" placeholder="Votre adresse email" class="px-4 py-3 w-full sm:w-64 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-                        <button class="animated-button mt-2 sm:mt-0 bg-yellow-500 text-blue-900 font-bold px-6 py-3 rounded-r-lg hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
-                            S'inscrire
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-   
     <section id="avis" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
