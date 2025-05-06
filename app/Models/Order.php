@@ -54,4 +54,9 @@ class Order extends Model
         
         return $colors[$this->status] ?? 'bg-gray-100 text-gray-800';
     }
+
+    public function payment()
+{
+    return $this->hasOne(Payment::class);
+}
 }
