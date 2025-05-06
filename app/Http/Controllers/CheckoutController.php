@@ -4,6 +4,7 @@
  use App\Models\Cart;
  use App\Models\Order;
  use App\Models\OrderItem;
+ use App\Models\Payment;
  use Illuminate\Http\Request;
  use Stripe\Stripe;
  use Stripe\Checkout\Session;
@@ -71,6 +72,16 @@
              'shipping_address' => $request->shipping_address,
              'billing_address' => $request->billing_address
          ]);
+
+         Payment::create([
+            'order_id' => $order->id,
+            'payment_id' => $session->id,
+            'payment_method' => 'stripe',
+            'amount' => $total / 100,
+            'currency' => 'eur',
+            'status' => 'pending'
+            
+        ]); 
  
          foreach ($cartItems as $item) {
              OrderItem::create([
@@ -94,34 +105,52 @@
      }
  }
  
-     public function success(Request $request)
-{
-    $sessionId = $request->get('session_id');
-
-    try {
-        Stripe::setApiKey(config('services.stripe.secret'));
-
-        $session = Session::retrieve($sessionId);
-
-        $order = Order::where('payment_id', $session->id)->first();
-
-        if ($order && $order->status === 'pending') {
-            $order->update(['status' => 'completed']);
-
-            Auth::user()->cart->items()->delete();
-        }
-
-        return view('checkout.success', compact('order'));
-
-    } catch (\Exception $e) {
-      
-        \Log::error('Erreur lors du traitement du paiement Stripe : ' . $e->getMessage());
-
-        return redirect()->route('checkout.cancel')->with('error', 'Une erreur est survenue lors de la validation de votre paiement.');
-    }
-}
-
+ public function success(Request $request)
+ {
+     $sessionId = $request->get('session_id');
  
+     if (!$sessionId) {
+         return redirect()->route('checkout.cancel')->with('error', 'Session ID manquant');
+     }
+ 
+     try {
+         Stripe::setApiKey(config('services.stripe.secret'));
+         $session = Session::retrieve($sessionId);
+ 
+         
+         if ($session->payment_status !== 'paid') {
+             return redirect()->route('checkout.cancel')->with('error', 'Paiement non confirmé');
+         }
+ 
+         $payment = Payment::where('payment_id', $session->id)->first();
+ 
+         if (!$payment) {
+             return redirect()->route('checkout.cancel')->with('error', 'Paiement introuvable');
+         }
+ 
+         
+         $payment->update([
+             'status' => 'succeeded',
+             
+         ]);
+ 
+        
+         $order = $payment->order;
+         $order->update(['status' => 'completed']);
+ 
+        
+         Auth::user()->cart->items()->delete();
+ 
+         return view('checkout.success', [
+             'order' => $order
+         ]);
+ 
+     } catch (\Exception $e) {
+         \Log::error('Erreur checkout success: '.$e->getMessage());
+         return redirect()->route('checkout.cancel')->with('error', 'Erreur lors de la confirmation du paiement: '.$e->getMessage());
+     }
+ }
+    
      public function cancel()
      {
          return view('checkout.cancel');
