@@ -71,7 +71,7 @@
                                 {{ $tenue->disponible ? 'Oui' : 'Non' }}
                             </span>
                         </p>
-                        <p><strong class="text-gray-600">Date de création :</strong> <span class="text-gray-800">{{ $tenue->date_creation }}</span></p>
+                        
                     </div>
                 </div>
             </div>
@@ -80,9 +80,7 @@
             <div class="mt-6">
                 <h2 class="text-xl font-semibold text-blue-700 mb-4">Autres informations</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <p><strong class="text-gray-600">Materiau :</strong> <span class="text-gray-800">{{ $tenue->materiau }}</span></p>
-                    <p><strong class="text-gray-600">Marque :</strong> <span class="text-gray-800">{{ $tenue->marque }}</span></p>
-                    <p><strong class="text-gray-600">Référence :</strong> <span class="text-gray-800">{{ $tenue->reference }}</span></p>
+                   
                     <p><strong class="text-gray-600">Quantité :</strong> <span class="text-gray-800">{{ $tenue->quantite }}</span></p>
                     <p><strong class="text-gray-600">Statut :</strong> 
                         <span class="px-2 py-1 text-sm rounded-full 

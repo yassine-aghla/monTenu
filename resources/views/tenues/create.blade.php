@@ -45,19 +45,17 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
+
+                <div class="mb-6">
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea name="description" id="description" rows="3"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
+                    @error('description')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
         </div>
 
-        <!-- Description -->
-        <div class="mb-6">
-            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-            <textarea name="description" id="description" rows="3"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
-            @error('description')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <!-- Prix, Taille, Couleur, Disponibilité -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 
           
@@ -119,17 +117,18 @@
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
+
+            <div>
+                <label for="premier_prix" class="block text-sm font-medium text-gray-700">Premier Prix</label>
+                <input type="number" name="premier_prix" id="premier_prix" value="{{ old('premier_prix') }}"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('premier_prix') border-red-500 @enderror" step="0.01">
+                @error('premier_prix')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
         </div>
 
-        <!-- Image -->
-        {{-- <div class="mb-6">
-            <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
-            <input type="file" name="image" id="image"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('image') border-red-500 @enderror">
-            @error('image')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-        </div> --}}
+    
 
         <div div class="mb-6">
             <label for="images">Images de la tenue</label>
@@ -138,50 +137,7 @@
 
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <!-- Date de création -->
-            <div>
-                <label for="date_creation" class="block text-sm font-medium text-gray-700">Date de création</label>
-                <input type="date" name="date_creation" id="date_creation" value="{{ old('date_creation') }}"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('date_creation') border-red-500 @enderror">
-                @error('date_creation')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <!-- Matériau -->
-            <div>
-                <label for="materiau" class="block text-sm font-medium text-gray-700">Matériau</label>
-                <input type="text" name="materiau" id="materiau" value="{{ old('materiau') }}"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('materiau') border-red-500 @enderror">
-                @error('materiau')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <!-- Marque -->
-            <div>
-                <label for="marque" class="block text-sm font-medium text-gray-700">Marque</label>
-                <input type="text" name="marque" id="marque" value="{{ old('marque') }}"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('marque') border-red-500 @enderror">
-                @error('marque')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <!-- Référence -->
-            <div>
-                <label for="reference" class="block text-sm font-medium text-gray-700">Référence</label>
-                <input type="text" name="reference" id="reference" value="{{ old('reference') }}"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('reference') border-red-500 @enderror">
-                @error('reference')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
-
-           
-        
-
-        
+          
             <!-- League -->
             <div>
                 <label for="league" class="block text-sm font-medium text-gray-700">Ligue</label>
@@ -226,15 +182,7 @@
                 @enderror
             </div>
 
-            <!-- Premier Prix -->
-            <div>
-                <label for="premier_prix" class="block text-sm font-medium text-gray-700">Premier Prix</label>
-                <input type="number" name="premier_prix" id="premier_prix" value="{{ old('premier_prix') }}"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('premier_prix') border-red-500 @enderror" step="0.01">
-                @error('premier_prix')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
+            
         </div>
 
         <!-- Bouton de soumission -->

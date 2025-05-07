@@ -162,7 +162,7 @@
             </svg>
             <h2 class="text-xl font-semibold mt-4">Aucune commande trouvée</h2>
             <p class="text-gray-600 mt-2">Vous n'avez pas encore passé de commande.</p>
-            <a href="{{ route('home') }}" class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition duration-200">
+            <a href="{{ route('shop.index') }}" class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition duration-200">
                 Voir nos produits
             </a>
         </div>

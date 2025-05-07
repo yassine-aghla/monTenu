@@ -22,17 +22,11 @@ class TenueRequest extends FormRequest
             'couleur' => 'required|string',
             'disponible' => 'required|boolean',
             'images.*' => 'nullable|image',
-            'date_creation' => 'required|date',
-            'materiau' => 'required|string',
-            'marque' => 'required|string',
-            'reference' => 'required|string',
-            'promotion' => 'nullable|integer',
             'league' => 'nullable|string|max:255', 
             'equipe' => 'nullable|string|max:255', 
             'quantite' => 'required|integer|min:0', 
             'statut' => 'required|in:published,pending,archive', 
             'premier_prix' => 'nullable|numeric',
-             'joueur'=>'nullable|string',
              'number' => 'nullable|integer|min:1|max:99',
              'brand_id' => 'required|exists:brands,id',
         ];
@@ -70,22 +64,10 @@ class TenueRequest extends FormRequest
             'image.image' => 'Le fichier doit être une image.',
 
             
-            'date_creation.required' => 'La date de création est obligatoire.',
-            'date_creation.date' => 'La date de création doit être une date valide.',
+         
 
          
-            'materiau.required' => 'Le matériau est obligatoire.',
-            'materiau.string' => 'Le matériau doit être une chaîne de caractères.',
-
-           
-            'marque.required' => 'La marque est obligatoire.',
-            'marque.string' => 'La marque doit être une chaîne de caractères.',
-
-            'reference.required' => 'La référence est obligatoire.',
-            'reference.string' => 'La référence doit être une chaîne de caractères.',
-
-         
-            'promotion.integer' => 'La promotion doit être un nombre entier.',
+            
 
            
             'league.string' => 'La ligue doit être une chaîne de caractères.',

@@ -289,7 +289,7 @@
                     <div class="p-6">
                         <span class="text-sm text-blue-600 font-medium">{{ $tenue->brand->nom ?? 'Marque inconnue' }}</span>
                         <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $tenue->nom }}</h3>
-                        
+                        <h6 class=" text-gray-400 mb-2">{{ $tenue->equipe }}</h6> 
                         <div class="flex justify-between items-center">
                             <div>
                                 

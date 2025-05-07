@@ -11,8 +11,7 @@ class Tenue extends Model
 
     protected $fillable = [
         'nom', 'description', 'prix', 'categorie_id', 'taille', 'couleur', 
-        'disponible','date_creation',
-         'materiau', 'marque', 'reference','league','equipe',
+        'disponible','league','equipe',
          'quantite','statut','premier_prix','number','brand_id'
     ];
 

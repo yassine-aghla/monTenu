@@ -193,6 +193,7 @@
                 
               
                 <div class="mb-6">
+                    <h3 class="font-semibold mb-2">Nom de joueur</h3>
                     <input type="text" name="search" placeholder="Rechercher..." 
                            class="w-full px-4 py-2 border rounded-lg" 
                            value="{{ request('search') }}"
@@ -312,8 +313,20 @@
                     <div class="p-4">
                         <h3 class="font-bold text-lg">{{ $tenue->nom }}</h3>
                         <p class="text-gray-600">{{ $tenue->brand->nom }}</p>
+                        <span class="inline-block bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded-full mt-2">
+                            Taille : {{ $tenue->taille }}
+                        </span>
                         <p class="text-blue-800 font-bold mt-2">€{{ number_format($tenue->prix, 2) }}</p>
+                        <div>
+                            <form action="{{ route('cart.add', $tenue->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="mt-4 animated-button bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full flex items-center justify-center">
+                                    <i class="fas fa-shopping-cart mr-2"></i>Ajouter au panier
+                                </button>
+                            </form>
+                        </div>
                     </div>
+                   
                 </div>
                 @endforeach
             </div>
