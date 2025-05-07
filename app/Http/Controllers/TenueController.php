@@ -120,10 +120,9 @@ public function frontendIndex()
 {
      $featuredTenues = Tenue::where('disponible', true)
                           ->where(function($query) {
-                              $query->where('statut', 'published')
-                                    ->orWhere('promotion', '>', 0);
-                          })
-                          ->with('brand', 'category', 'images')
+                              $query->where('statut', 'published');
+                            })
+                            ->with('brand', 'category', 'images')
                           ->orderBy('created_at', 'desc')
                           ->take(8)
                           ->get();

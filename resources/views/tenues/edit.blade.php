@@ -156,7 +156,7 @@
             <input type="file" name="images[]" id="images" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('image') border-red-500 @enderror" multiple>
         </div>
 
-        <!-- Date de création, Matériau, Marque, Référence, Promotion -->
+        <!-- Date de création, Matériau, Marque, Référence -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <!-- Date de création -->
             <div>
@@ -198,15 +198,7 @@
                 @enderror
             </div>
 
-            <!-- Promotion -->
-            <div>
-                <label for="promotion" class="block text-sm font-medium text-gray-700">Promotion</label>
-                <input type="number" name="promotion" id="promotion" value="{{ old('promotion', $tenue->promotion) }}"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('promotion') border-red-500 @enderror" placeholder="Pourcentage de réduction">
-                @error('promotion')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
+         
         </div>
 
         <!-- Nouveaux champs : League, Equipe, Quantité, Statut, Premier Prix -->

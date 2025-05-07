@@ -40,7 +40,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="fas fa-envelope text-gray-400"></i>
                         </div>
-                        <input type="email" id="email" name="email" required
+                        <input type="email" id="email" name="email" 
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="votre@email.com">
                             @error('email')
@@ -59,7 +59,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="fas fa-lock text-gray-400"></i>
                         </div>
-                        <input type="password" id="password" name="password" required
+                        <input type="password" id="password" name="password" 
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="••••••••">
                             @error('password')
@@ -68,14 +68,8 @@
                     </div>
                 </div>
                 
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                        <input id="remember_me" name="remember" type="checkbox" 
-                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                        <label for="remember_me" class="ml-2 block text-sm text-gray-700">
-                            Se souvenir de moi
-                        </label>
-                    </div>
+                <div class="flex items-center justify-end">
+                    
                     
                     <div class="text-sm">
                         <a href="{{ route('password.request') }}" class="font-medium text-blue-600 hover:text-blue-500">
@@ -103,36 +97,7 @@
                         @error('error')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
-            
-            
-            <div class="mt-8 relative">
-                <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t border-gray-300"></div>
-                </div>
-                <div class="relative flex justify-center text-sm">
-                    <span class="px-4 bg-white text-gray-500">ou continuez avec</span>
-                </div>
-            </div>
-      
-            <div class="mt-6 grid grid-cols-3 gap-3">
-                <div>
-                    <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        <i class="fab fa-google text-red-500"></i>
-                    </a>
-                </div>
-                <div>
-                    <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        <i class="fab fa-facebook-f text-blue-600"></i>
-                    </a>
-                </div>
-                <div>
-                    <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        <i class="fab fa-twitter text-blue-400"></i>
-                    </a>
-                </div>
-            </div>
-            
-            
+              
             <div class="mt-8 text-center">
                 <p class="text-sm text-gray-600">
                     Vous n'avez pas encore de compte ?

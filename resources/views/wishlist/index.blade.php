@@ -227,7 +227,6 @@
                 <ul class="space-y-2">
                     <li><a href="#" class="text-blue-200 hover:text-white transition">Accueil</a></li>
                     <li><a href="#" class="text-blue-200 hover:text-white transition">Nouveautés</a></li>
-                    <li><a href="#" class="text-blue-200 hover:text-white transition">Promotions</a></li>
                     <li><a href="#" class="text-blue-200 hover:text-white transition">Maillots de clubs</a></li>
                     <li><a href="#" class="text-blue-200 hover:text-white transition">Équipes nationales</a></li>
                     <li><a href="#" class="text-blue-200 hover:text-white transition">Collection vintage</a></li>

@@ -40,7 +40,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="fas fa-user text-gray-400"></i>
                         </div>
-                        <input type="text" id="name" name="name" required
+                        <input type="text" id="name" name="name" 
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Votre nom">
                             @error('name')
@@ -58,7 +58,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="fas fa-envelope text-gray-400"></i>
                         </div>
-                        <input type="email" id="email" name="email" required
+                        <input type="email" id="email" name="email" 
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="votre@email.com">
                             @error('email')
@@ -77,7 +77,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="fas fa-lock text-gray-400"></i>
                         </div>
-                        <input type="password" id="password" name="password" required
+                        <input type="password" id="password" name="password" 
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="••••••••">
                             @error('password')
@@ -98,7 +98,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="fas fa-lock text-gray-400"></i>
                         </div>
-                        <input type="password" id="password_confirmation" name="password_confirmation" required
+                        <input type="password" id="password_confirmation" name="password_confirmation" 
                             class="pl-10 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="••••••••">
                             @error('password_confirmation')
@@ -107,20 +107,7 @@
                     </div>
                 </div>
                 
-               
-                <div class="flex items-start">
-                    <div class="flex items-center h-5">
-                        <input id="terms" name="terms" type="checkbox" required
-                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                    </div>
-                    <div class="ml-3 text-sm">
-                        <label for="terms" class="text-gray-600">
-                            J'accepte les <a href="#" class="text-blue-600 hover:underline">conditions d'utilisation</a> et la <a href="#" class="text-blue-600 hover:underline">politique de confidentialité</a>
-                        </label>
-                    </div>
-                </div>
-                
-              
+
                 <div>
                     <button type="submit" 
                         class="relative w-full bg-gradient-to-r from-blue-700 to-blue-500 text-white py-3 px-4 rounded-lg
@@ -135,39 +122,6 @@
                 </div>
             </form>
 
-
-         
-            
-         
-            <div class="mt-8 relative">
-                <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t border-gray-300"></div>
-                </div>
-                <div class="relative flex justify-center text-sm">
-                    <span class="px-4 bg-white text-gray-500">ou inscrivez-vous avec</span>
-                </div>
-            </div>
-            
-           
-            <div class="mt-6 grid grid-cols-3 gap-3">
-                <div>
-                    <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        <i class="fab fa-google text-red-500"></i>
-                    </a>
-                </div>
-                <div>
-                    <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        <i class="fab fa-facebook-f text-blue-600"></i>
-                    </a>
-                </div>
-                <div>
-                    <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        <i class="fab fa-twitter text-blue-400"></i>
-                    </a>
-                </div>
-            </div>
-            
-            
             <div class="mt-6 text-center">
                 <p class="text-sm text-gray-600">
                     Déjà membre ?

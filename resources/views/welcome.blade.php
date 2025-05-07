@@ -183,9 +183,7 @@
                 <a href="#nouveautes" class="animated-button bg-white text-blue-800 px-8 py-3 rounded-full font-bold text-center hover:bg-blue-50 shadow-lg">
                     Voir les nouveautés
                 </a>
-                <a href="#categories" class="animated-button bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-bold text-center hover:bg-white hover:bg-opacity-10 shadow-lg">
-                    Nos catégories
-                </a>
+               
             </div>
         </div>
         <div class="md:w-1/2 relative">
@@ -279,15 +277,12 @@
                         </div>
             
                         
-                        @if($tenue->promotion > 0)
-                            <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                                -{{ $tenue->promotion }}%
-                            </span>
-                        @elseif($tenue->created_at->diffInDays() < 30)
-                            <span class="absolute top-3 right-3 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                                Nouveau
-                            </span>
-                        @endif
+                        @if($tenue->category)
+                        <span class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            {{ substr($tenue->category->name, 0, 1) }}
+                        </span>
+                    @endif
+                    
                     </div>
                     
                    
@@ -297,14 +292,13 @@
                         
                         <div class="flex justify-between items-center">
                             <div>
-                                @if($tenue->promotion > 0)
-                                    <span class="text-gray-400 line-through text-sm">€{{ number_format($tenue->prix, 2) }}</span>
+                                
+                                    <span class="text-gray-400 line-through text-sm">€{{ number_format($tenue->premier_prix, 2) }}</span>
                                     <span class="text-blue-800 font-bold text-xl">
-                                        €{{ number_format($tenue->prix * (1 - $tenue->promotion/100), 2) }}
+                                        €{{ number_format($tenue->prix, 2) }}
                                     </span>
-                                @else
-                                    <span class="text-blue-800 font-bold text-xl">€{{ number_format($tenue->prix, 2) }}</span>
-                                @endif
+                             
+                                
                             </div>
                             <div class="flex items-center">
                                 <div class="flex text-yellow-400 mr-2">
@@ -570,7 +564,6 @@
                 <ul class="space-y-2">
                     <li><a href="#" class="text-blue-200 hover:text-white transition">Accueil</a></li>
                     <li><a href="#" class="text-blue-200 hover:text-white transition">Nouveautés</a></li>
-                    <li><a href="#" class="text-blue-200 hover:text-white transition">Promotions</a></li>
                     <li><a href="#" class="text-blue-200 hover:text-white transition">Maillots de clubs</a></li>
                     <li><a href="#" class="text-blue-200 hover:text-white transition">Équipes nationales</a></li>
                     <li><a href="#" class="text-blue-200 hover:text-white transition">Collection vintage</a></li>

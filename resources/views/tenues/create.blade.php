@@ -186,15 +186,7 @@
                 @enderror
             </div>
 
-            <!-- Promotion -->
-            <div>
-                <label for="promotion" class="block text-sm font-medium text-gray-700">Promotion</label>
-                <input type="number" name="promotion" id="promotion" value="{{ old('promotion') }}"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('promotion') border-red-500 @enderror" placeholder="Pourcentage de réduction">
-                @error('promotion')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
+           
         
 
         
