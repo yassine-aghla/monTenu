@@ -141,18 +141,26 @@
         <div class="md:col-span-2">
             <div class="bg-white rounded-lg shadow-md p-6 mb-6">
                 <h2 class="text-xl font-semibold mb-4">Informations de livraison</h2>
+
+               
                 
                 <form id="checkout-form" action="{{ route('checkout.store') }}" method="POST">
                     @csrf
                     
                     <div class="mb-4">
-                        <label for="shipping_address" class="block text-gray-700 mb-2">Adresse de livraison</label>
-                        <textarea id="shipping_address" name="shipping_address" class="w-full border rounded px-3 py-2" rows="3" required></textarea>
+                        <label for="shipping_address" class=" text-gray-700 mb-2">Adresse de livraison</label>
+                        <textarea id="shipping_address" name="shipping_address" class="w-full border rounded px-3 py-2" rows="3" ></textarea>
+                             @error('shipping_address')
+                             <span class="text-red-500 text-sm">{{ $message }}</span>
+                              @enderror
                     </div>
                     
                     <div class="mb-4">
-                        <label for="billing_address" class="block text-gray-700 mb-2">Adresse de facturation</label>
-                        <textarea id="billing_address" name="billing_address" class="w-full border rounded px-3 py-2" rows="3" required></textarea>
+                        <label for="billing_address" class=" text-gray-700 mb-2">Adresse de facturation</label>
+                        <textarea id="billing_address" name="billing_address" class="w-full border rounded px-3 py-2" rows="3" ></textarea>
+                         @error('billing_address')
+                          <span class="text-red-500 text-sm">{{ $message }}</span>
+                             @enderror
                     </div>
                 </form>
             </div>
@@ -242,7 +250,7 @@
                 <ul class="space-y-3">
                     <li class="flex items-start">
                         <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-300"></i>
-                        <span class="text-blue-200">123 Avenue du Football, 75001 Paris, France</span>
+                        <span class="text-blue-200">123 Avenue du Football, 75001 Mohemmedia, Maroc</span>
                     </li>
                     <li class="flex items-center">
                         <i class="fas fa-phone mr-3 text-blue-300"></i>

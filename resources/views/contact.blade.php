@@ -224,7 +224,7 @@
                                 </div>
                                 <div>
                                     <h3 class="font-bold text-gray-900 mb-1">Adresse</h3>
-                                    <p class="text-gray-700">123 Avenue du Football<br>75001 Paris, France</p>
+                                    <p class="text-gray-700">123 Avenue du Football<br>75001 Mohemmedia, Maroc</p>
                                 </div>
                             </div>
                             
@@ -356,7 +356,7 @@
                 <ul class="space-y-3">
                     <li class="flex items-start">
                         <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-300"></i>
-                        <span class="text-blue-200">123 Avenue du Football, 75001 Paris, France</span>
+                        <span class="text-blue-200">123 Avenue du Football, 75001 Mohemmedia, Maroc</span>
                     </li>
                     <li class="flex items-center">
                         <i class="fas fa-phone mr-3 text-blue-300"></i>

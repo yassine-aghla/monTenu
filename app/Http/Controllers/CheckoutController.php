@@ -30,6 +30,15 @@
     public function store(Request $request)
     {
      try {
+              $validatedData = $request->validate([
+            'shipping_address' => 'required|string|min:10|max:255',
+            'billing_address' => 'required|string|min:10|max:255',]
+            , [
+            'shipping_address.required' => 'L\'adresse de livraison est obligatoire.',
+            'shipping_address.min' => 'L\'adresse de livraison doit contenir au moins 10 caractères.',
+            'billing_address.required' => 'L\'adresse de facturation est obligatoire.',
+            'billing_address.min' => 'L\'adresse de facturation doit contenir au moins 10 caractères.',
+        ]);
          Stripe::setApiKey(config('services.stripe.secret'));
  
          $cart = Auth::user()->cart;
@@ -69,8 +78,8 @@
              'total' => $total / 100, 
              'status' => 'pending',
              'payment_id' => $session->id,
-             'shipping_address' => $request->shipping_address,
-             'billing_address' => $request->billing_address
+             'shipping_address' => $validatedData['shipping_address'],
+             'billing_address' => $validatedData['billing_address']
          ]);
 
          Payment::create([
