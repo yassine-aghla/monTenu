@@ -47,13 +47,10 @@
             
             <div class="flex-1 flex flex-col">
                 
-                <header class="bg-white shadow-md p-4 flex justify-between items-center">
-                    <input type="text" placeholder="Rechercher..." class="border p-2 rounded w-1/3">
-                    <div class="flex items-center space-x-4">
-                        <button class="relative">
-                            <span class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">3</span>
-                            🔔
-                        </button>
+                <header class="bg-white shadow-md p-4 flex justify-end items-center">
+                   
+                    <div class="flex items-end space-x-4">
+                       
                         <img src="{{ asset('images/image.png') }}" alt="Admin" class="w-10 h-10 rounded-full">
                     </div>
                 </header>
