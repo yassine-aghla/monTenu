@@ -9,7 +9,7 @@ class TenueImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tenue_id', 'image_path', 'type'];
+    protected $fillable = ['tenue_id', 'image_path'];
 
     public function tenue()
     {

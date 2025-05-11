@@ -59,45 +59,34 @@ Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
-// Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout.submit');
-// Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-// Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
-// Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
-// Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
-// Route::middleware('auth')->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-// });
+
 
 
 Route::middleware(['auth', 'check.permission:Gérer les produits'])->group(function () {
     Route::resource('tenues', TenueController::class);
     Route::delete('/tenue-images/{image}', [TenueController::class, 'destroyImage'])->name('tenue-images.destroy');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+    Route::post('/clients/{user}/assign-role', [ClientController::class, 'assignRole'])->name('clients.assignRole');
+    Route::post('/clients/{user}/ban', [ClientController::class, 'ban'])->name('clients.ban');
+    Route::post('/clients/{user}/Active', [ClientController::class, 'Active'])->name('clients.Active');
+    Route::delete('/clients/{user}', [ClientController::class, 'destroy'])->name('clients.destroy');
+    Route::resource('categories', CategorieController::class);
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
+    Route::resource('brands', BrandController::class);
+    Route::resource('hero-sections', HeroSectionController::class);
+    Route::put('hero-sections/{hero_section}/activate', [HeroSectionController::class, 'setActive'])->name('hero-sections.activate');
+    Route::get('/orders', [OrderController::class, 'display'])->name('commandes.index');
+    Route::get('/orders/{order}', [OrderController::class, 'showBack'])->name('commandes.show');
+    Route::get('/paniers/create', [PanierController::class, 'create'])->name('paniers.create');
 });
 
-Route::get('/tenues/create', [TenueController::class, 'create'])->name('tenues.create');
-// Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
 
-Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
-Route::post('/clients/{user}/assign-role', [ClientController::class, 'assignRole'])->name('clients.assignRole');
-Route::post('/clients/{user}/ban', [ClientController::class, 'ban'])->name('clients.ban');
-Route::post('/clients/{user}/Active', [ClientController::class, 'Active'])->name('clients.Active');
-Route::delete('/clients/{user}', [ClientController::class, 'destroy'])->name('clients.destroy');
 
-Route::resource('categories', CategorieController::class);
-// Route::get('/commandes/create', [OrderController::class, 'index'])->name('commandes.index');
-Route::get('/orders', [OrderController::class, 'display'])->name('commandes.index');
-Route::get('/orders/{order}', [OrderController::class, 'showBack'])->name('commandes.show');
-Route::get('/paniers/create', [PanierController::class, 'create'])->name('paniers.create');
-
-Route::resource('roles', RoleController::class);
-Route::resource('permissions', PermissionController::class);
-Route::resource('brands', BrandController::class);
-Route::resource('hero-sections', HeroSectionController::class);
-Route::put('hero-sections/{hero_section}/activate', [HeroSectionController::class, 'setActive'])->name('hero-sections.activate');
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::post('/wishlist/{tenue}', [WishlistController::class, 'store'])->name('wishlist.store');
 Route::delete('/wishlist/{tenue}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
@@ -115,6 +104,5 @@ Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('che
     
 Route::get('/my-orders', [OrderController::class, 'index'])->name('orders.index');
 Route::get('/my-orders/{order}', [OrderController::class, 'show'])->name('orders.show');
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 

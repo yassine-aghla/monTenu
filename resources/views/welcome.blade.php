@@ -278,7 +278,7 @@
             
                         
                         @if($tenue->category)
-                        <span class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        <span class="absolute top-3 right-3 bg-purple-900 text-white text-xs font-bold px-3 py-1 rounded-full">
                             {{ substr($tenue->category->name, 0, 1) }}
                         </span>
                     @endif
